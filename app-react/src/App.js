@@ -1,39 +1,28 @@
 import React, { Component } from 'react';
 import {
-    Page,
-    Button,
-    Toolbar as OnsenToolbar,
-    BackButton,
-    Icon
-} from "react-onsenui";
-import {
     Form
 } from "./views/Login";
+import {
+    Page
+} from "./views/Page";
 
-export function Toolbar () {
-
-    return (
-        <OnsenToolbar>
-            <div className="left">
-                <BackButton>Back</BackButton>
-            </div>
-            <div className="center">Title</div>
-            <div className="right">
-                <Icon icon="md-menu"/>
-            </div>
-        </OnsenToolbar>
-    );
-
-}
 
 
 class App extends Component {
     render() {
         return (
             <Page
-                renderToolbar={Toolbar}
+                title="Login"
             >
-                <Form />
+                <section
+                    style={{
+                        maxWidth: "80%",
+                        margin: "auto",
+                        paddingTop: "3em"
+                    }}
+                >
+                    <Form />
+                </section>
             </Page>
         );
     }

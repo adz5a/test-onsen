@@ -13,7 +13,6 @@ export class Form extends Component {
         onLogin: PropTypes.func,
     };
 
-
     componentWillMount () {
 
         this.onButtonClicked = () => {
@@ -100,3 +99,4 @@ export class Form extends Component {
     }
 }
 
+export function LoginPage () {}
