@@ -6,7 +6,9 @@ import {
     BackButton,
     Icon
 } from "react-onsenui";
-
+import {
+    Form
+} from "./views/Login";
 
 export function Toolbar () {
 
@@ -31,7 +33,7 @@ class App extends Component {
             <Page
                 renderToolbar={Toolbar}
             >
-                <Button>Click me</Button>
+                <Form />
             </Page>
         );
     }
