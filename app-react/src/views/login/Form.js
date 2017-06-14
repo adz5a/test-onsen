@@ -1,4 +1,5 @@
 import React, { Component,  } from "react";
+import { findDOMNode } from "react-dom";
 import {
     Input,
     Button
@@ -22,10 +23,13 @@ export class Form extends Component {
 
         this.onButtonClicked = () => {
 
-            return {
-                email: this.refs.email.value,
-                password: this.refs.password.value,
+            console.log(this.inputs.email);
+            const creds = {
+                email: this.inputs.email.value,
+                password: this.inputs.password.value,
             };
+            console.log(creds);
+            return creds;
 
         }
 
@@ -49,6 +53,8 @@ export class Form extends Component {
             }
 
         }
+
+        this.inputs = {};
     }
 
     componentWillUpdate () {}
@@ -72,14 +78,14 @@ export class Form extends Component {
                     float
                     placeholder="xyz@yolo.gmail.com"
                     modifier="underbar"
-                    ref={"email"}
+                    ref={ref => this.inputs.email = findDOMNode(ref)}
                 />
                 <Input 
                     type="password"
                     float
                     placeholder="****"
                     modifier="underbar"
-                    ref={"password"}
+                    ref={ref => this.inputs.password = findDOMNode(ref)}
                 />
 
             <section
@@ -90,10 +96,10 @@ export class Form extends Component {
                 }}
             >
                 <Button type="submit"
-                    onClick={e => console.log(this.onButtonClicked())}
+                    onClick={this.onLogin}
                 >Login</Button>
                 <Button type="submit"
-                    onClick={e => console.log(this.onButtonClicked())}
+                    onClick={this.onSignIn}
                 >SignIn</Button>
             </section>
         </form>
@@ -109,18 +115,18 @@ export function mapDispatchToProps ( dispatch ) {
     return {
         onSignIn ( credentials ) {
 
-            return {
+            return dispatch({
                 type: SIGN_USER,
                 data: credentials
-            };
+            });
 
         },
         onLogin ( credentials ) {
 
-            return {
+            return dispatch({
                 type: LOG_USER,
                 data: credentials
-            };
+            });
 
         }
     };

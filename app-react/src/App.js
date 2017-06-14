@@ -6,6 +6,9 @@ import {
     HomePage
 } from "./views/Home";
 import {
+    TodoListPage
+} from "./views/todolist/Page";
+import {
     BrowserRouter as Router,
     Route
 } from "react-router-dom";
@@ -27,6 +30,10 @@ class App extends Component {
                     <Route 
                         component={LoginPage}
                         path="/login"
+                    />
+                    <Route 
+                        component={TodoListPage}
+                        path="/todolist"
                     />
             </div>
         </Router>
