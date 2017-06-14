@@ -11,11 +11,6 @@ import {
     reducer as todolist 
 } from "./todolist";
 
-function noopMiddleware () {
-
-    return next => action => next(action);
-
-}
 
 export function createStore ( {
     middlewares = []

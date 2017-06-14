@@ -14,6 +14,9 @@ import {
 import {
     userApi
 } from "./api/user";
+import {
+    todoApi
+} from "./api/todolist";
 
 import "onsenui/css/onsen-css-components.css";
 import "onsenui/css/onsenui.css";
@@ -21,11 +24,13 @@ import "onsenui/css/onsenui.css";
 
 const api = initApi(firebaseConfig);
 const userMiddleware = userApi(api);
+const todoMiddleware = todoApi(api);
 
 ReactDOM.render(
     <Provider store={createStore({
         middlewares: [
-            userMiddleware
+            userMiddleware,
+            todoMiddleware
         ]
     })}>
         <App />

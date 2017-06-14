@@ -26,7 +26,10 @@ export class Form extends Component {
 
             if ( typeof this.props.onAdd === "function" ) {
 
-                this.props.onAdd(this.inputs.todo.value);
+                this.props.onAdd({
+                    todo: this.inputs.todo.value,
+                    date: Date.now()
+                });
 
             }
 
@@ -39,7 +42,7 @@ export class Form extends Component {
     render () {
 
         return (
-            <form
+            <section
                 style={{
                     textAlign: "center",
                     padding: "1em 0 1em 0"
@@ -56,7 +59,7 @@ export class Form extends Component {
                 >
                     Add
                 </Button>
-            </form>
+            </section>
         );
 
     }

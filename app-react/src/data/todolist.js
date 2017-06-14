@@ -1,9 +1,25 @@
-import { partial } from "lodash";
+import { 
+    partial,
+    conforms,
+    isObject,
+    isString,
+    isFinite,
+    defaults,
+} from "lodash";
 import { joinUppercase } from "./../commons";
 
 export const TODOACTION = partial(joinUppercase, "todo-list");
 
 export const ADD_TODO = TODOACTION("add-todo");
+export const ADD_TODO_ERROR = TODOACTION("add-todo-error");
+
+
+export const isTodo = conforms({
+    todo: isString,
+    id: isString,
+    date: isFinite
+});
+
 
 export function reducer ( state = [], action ) {
 

@@ -34,7 +34,7 @@ export function TodoItem ( { todo } ) {
             <div
                 className="center"
             >
-                { todo }
+                { todo.todo }
             </div>
             <div
                 className="right"
