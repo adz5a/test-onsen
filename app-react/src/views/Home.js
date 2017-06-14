@@ -19,11 +19,18 @@ export function HomePage () {
                     paddingTop: "3em"
                 }}
             >
-                <div>
-                    <Link to={"/login"}>
-                        {"hello world"}
-                    </Link>
-                </div>
+                <ul>
+                    <li>
+                        <Link to={"/login"}>
+                            {"Login"}
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to={"/todolist"}>
+                            {"You Todo List"}
+                        </Link>
+                    </li>
+                </ul>
             </section>
         </Page>
 
