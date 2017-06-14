@@ -5,6 +5,12 @@ import React, {
 import {
     Page
 } from "./../Page";
+import {
+    Form
+} from "./Form";
+import {
+    List
+}from "./List";
 
 export function TodoListPage () {
 
@@ -13,7 +19,15 @@ export function TodoListPage () {
             title="Todo List"
             hasBackButton={true}
         >
-            <section></section>
+            <section>
+                <Form />
+                <List 
+                    todos={[
+                        "a cat",
+                        "a dog"
+                    ]}
+                />
+            </section>
         </Page>
     );
 
