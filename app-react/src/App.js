@@ -1,29 +1,35 @@
 import React, { Component } from 'react';
 import {
-    Form
+    LoginPage
 } from "./views/Login";
 import {
-    Page
-} from "./views/Page";
+    HomePage
+} from "./views/Home";
+import {
+    BrowserRouter as Router,
+    Route
+} from "react-router-dom";
 
 
 
 class App extends Component {
     render() {
         return (
-            <Page
-                title="Login"
+            <Router
+                forceRefresh={false}
             >
-                <section
-                    style={{
-                        maxWidth: "80%",
-                        margin: "auto",
-                        paddingTop: "3em"
-                    }}
-                >
-                    <Form />
-                </section>
-            </Page>
+                <div>
+                    <Route 
+                        path="/"
+                        exact={true}
+                        component={HomePage}
+                    />
+                    <Route 
+                        component={LoginPage}
+                        path="/login"
+                    />
+            </div>
+        </Router>
         );
     }
 }

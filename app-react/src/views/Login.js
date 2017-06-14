@@ -3,6 +3,9 @@ import {
     Input,
     Button
 } from "react-onsenui";
+import {
+    Page
+} from "./Page";
 
 const noop = () => {};
 
@@ -99,4 +102,24 @@ export class Form extends Component {
     }
 }
 
-export function LoginPage () {}
+export function LoginPage () {
+
+    return (
+        <Page
+            title="Login"
+            hasBackButton={true}
+        >
+            <section
+                style={{
+                    maxWidth: "80%",
+                    margin: "auto",
+                    paddingTop: "3em"
+                }}
+            >
+                <Form />
+            </section>
+        </Page>
+
+    )
+
+}
