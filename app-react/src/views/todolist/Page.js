@@ -6,10 +6,10 @@ import {
     Page
 } from "./../Page";
 import {
-    Form
+    ConnectedForm as Form
 } from "./Form";
 import {
-    List
+    ConnectedList as List
 }from "./List";
 
 export function TodoListPage () {
@@ -22,10 +22,6 @@ export function TodoListPage () {
             <section>
                 <Form />
                 <List 
-                    todos={[
-                        "a cat",
-                        "a dog"
-                    ]}
                 />
             </section>
         </Page>

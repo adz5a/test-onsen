@@ -6,6 +6,7 @@ import {
     List as OnsenList,
     ListItem
 } from "react-onsenui";
+import { connect } from "react-redux";
 
 export function List ( { todos = [] }) {
 
@@ -13,8 +14,9 @@ export function List ( { todos = [] }) {
         <OnsenList
             dataSource={todos} 
             renderRow={
-                todo => <TodoItem
+                ( todo, key ) => <TodoItem
                     todo={todo}
+                    key={key}
                 />
             }
         />
@@ -41,3 +43,13 @@ export function TodoItem ( { todo } ) {
     );
 
 }
+
+export function mapStateToProps ( state ) {
+
+    return {
+        todos: state.todolist
+    };
+
+}
+
+export const ConnectedList = connect(mapStateToProps)(List);

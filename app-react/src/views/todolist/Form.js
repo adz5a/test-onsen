@@ -1,27 +1,86 @@
 import React, { 
-    // Component,
+    Component,
     // PropTypes
 } from "react";
 import {
     Input,
     Button
 } from "react-onsenui";
+import { connect } from "react-redux";
+import { findDOMNode } from "react-dom";
+import PropTypes from "prop-types";
+import {
+    ADD_TODO
+} from "./../../data/todolist";
 
-export function Form () {
+export class Form extends Component {
 
-    return (
-        <form
-            style={{
-                textAlign: "center",
-                padding: "1em 0 1em 0"
-            }}
-        >
-            <Input 
-                type="text"
-                placeholder="a lot of stuff to do"
-            />
-            <Button type="submit">Add</Button>
-        </form>
-    );
+    static propTypes = {
+        onAdd: PropTypes.func
+    };
+
+    componentWillMount () {
+
+        this.inputs = {};
+        this.onAdd = () => {
+
+            if ( typeof this.props.onAdd === "function" ) {
+
+                this.props.onAdd(this.inputs.todo.value);
+
+            }
+
+
+        };
+
+    }
+
+
+    render () {
+
+        return (
+            <form
+                style={{
+                    textAlign: "center",
+                    padding: "1em 0 1em 0"
+                }}
+            >
+                <Input 
+                    type="text"
+                    placeholder="a lot of stuff to do"
+                    ref={ ref => this.inputs.todo = findDOMNode(ref)}
+                />
+                <Button 
+                    onClick={this.onAdd}
+                    type="submit"
+                >
+                    Add
+                </Button>
+            </form>
+        );
+
+    }
 
 }
+
+
+export function mapDispatchToProps ( dispatch ) {
+
+    return {
+        onAdd ( todo ) {
+
+            return dispatch({
+                type: ADD_TODO,
+                data: todo
+            });
+
+        }
+    }
+
+}
+
+
+export const ConnectedForm = connect(
+    null,
+    mapDispatchToProps
+)(Form);
