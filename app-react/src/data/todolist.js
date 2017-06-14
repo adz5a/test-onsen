@@ -1,10 +1,8 @@
 import { 
     partial,
     conforms,
-    isObject,
     isString,
     isFinite,
-    defaults,
 } from "lodash";
 import { joinUppercase } from "./../commons";
 

@@ -6,9 +6,7 @@ import {
 import {
     conforms,
     isObject,
-    isString,
     defaults,
-    pick
 } from "lodash";
 import {
     isUser
