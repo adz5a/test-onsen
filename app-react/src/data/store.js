@@ -7,6 +7,9 @@ import {
 import {
     reducer as user 
 } from "./user";
+import {
+    reducer as todolist 
+} from "./todolist";
 
 function noopMiddleware () {
 
@@ -21,7 +24,8 @@ export function createStore () {
     const middlewares = [ noopMiddleware ];
 
     const reducer = combineReducers({
-        user
+        user,
+        todolist
     });
 
     if ( process.env.NODE_ENV !== "production" ) {
