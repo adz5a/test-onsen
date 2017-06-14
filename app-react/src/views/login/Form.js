@@ -1,13 +1,15 @@
-import React, { Component, PropTypes } from "react";
+import React, { Component,  } from "react";
 import {
     Input,
     Button
 } from "react-onsenui";
+import { connect } from "react-redux";
 import {
-    Page
-} from "./Page";
+    LOG_USER,
+    SIGN_USER
+} from "./../../data/user";
+import PropTypes from "prop-types";
 
-const noop = () => {};
 
 export class Form extends Component {
 
@@ -102,24 +104,28 @@ export class Form extends Component {
     }
 }
 
-export function LoginPage () {
+export function mapDispatchToProps ( dispatch ) {
 
-    return (
-        <Page
-            title="Login"
-            hasBackButton={true}
-        >
-            <section
-                style={{
-                    maxWidth: "80%",
-                    margin: "auto",
-                    paddingTop: "3em"
-                }}
-            >
-                <Form />
-            </section>
-        </Page>
+    return {
+        onSignIn ( credentials ) {
 
-    )
+            return {
+                type: SIGN_USER,
+                data: credentials
+            };
+
+        },
+        onLogin ( credentials ) {
+
+            return {
+                type: LOG_USER,
+                data: credentials
+            };
+
+        }
+    };
 
 }
+
+export const ConnectedForm = connect(null, mapDispatchToProps)(Form);
+

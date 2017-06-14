@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
+import React, {  } from 'react';
 import {
     Page as OnsenPage,
-    Button,
     Toolbar as OnsenToolbar,
     BackButton,
     Icon

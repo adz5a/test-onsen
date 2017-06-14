@@ -1,16 +1,21 @@
-import React, {} from "react";
+import React, { 
+    // Component,
+    // PropTypes
+} from "react";
 import {
     Page
-} from "./Page";
+} from "./../Page";
 import {
-    Link
-} from "react-router-dom";
+    ConnectedForm as Form
+} from "./Form";
 
-export function HomePage () {
+
+export function LoginPage () {
 
     return (
         <Page
-            title="Home"
+            title="Login"
+            hasBackButton={true}
         >
             <section
                 style={{
@@ -19,11 +24,7 @@ export function HomePage () {
                     paddingTop: "3em"
                 }}
             >
-                <div>
-                    <Link to={"/login"}>
-                        {"hello world"}
-                    </Link>
-                </div>
+                <Form />
             </section>
         </Page>
 

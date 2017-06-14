@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {
     LoginPage
-} from "./views/Login";
+} from "./views/login/Page";
 import {
     HomePage
 } from "./views/Home";
