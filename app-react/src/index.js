@@ -8,12 +8,26 @@ import {
 import {
     Provider
 } from "react-redux";
+import {
+    initApi
+} from "./api";
+import {
+    userApi
+} from "./api/user";
 
 import "onsenui/css/onsen-css-components.css";
 import "onsenui/css/onsenui.css";
 
+
+const api = initApi(firebaseConfig);
+const userMiddleware = userApi(api);
+
 ReactDOM.render(
-    <Provider store={createStore()}>
+    <Provider store={createStore({
+        middlewares: [
+            userMiddleware
+        ]
+    })}>
         <App />
     </Provider>, document.getElementById('root'));
 registerServiceWorker();

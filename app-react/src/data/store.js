@@ -17,11 +17,12 @@ function noopMiddleware () {
 
 }
 
-export function createStore () {
+export function createStore ( {
+    middlewares = []
+} = {}) {
 
     let composeEnhancers = compose;
 
-    const middlewares = [ noopMiddleware ];
 
     const reducer = combineReducers({
         user,
