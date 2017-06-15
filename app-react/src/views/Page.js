@@ -1,10 +1,12 @@
 import React, {  } from 'react';
+import propTypes from "prop-types";
 import {
     Page as OnsenPage,
     Toolbar as OnsenToolbar,
     BackButton,
     Icon
 } from "react-onsenui";
+import { noop } from "lodash";
 
 
 export function goBack () {
@@ -17,7 +19,8 @@ export function goBack () {
 
 export function createToolbar ( {
     title,
-    hasBackButton
+    hasBackButton,
+    toggleMenu = noop
 } ) {
 
     return () => (
@@ -34,7 +37,13 @@ export function createToolbar ( {
             </div>
             <div className="center">{title}</div>
             <div className="right">
-                <Icon icon="md-menu"/>
+                <Icon 
+                    style={{
+                        marginRight: "1em"
+                    }}
+                    icon="ion-navicon, material:md-menu"
+                    onClick={toggleMenu}
+                />
             </div>
         </OnsenToolbar>
     );
@@ -46,14 +55,22 @@ export function Page ( {
     title = "",
     hasBackButton = false,
     children
-} ) {
+}, context ) {
 
     return (
             <OnsenPage
-                renderToolbar={createToolbar({ title, hasBackButton })}
+                renderToolbar={createToolbar({ 
+                    title,
+                    hasBackButton,
+                    toggleMenu: context.toggleMenu
+                })}
             >
                 { children }
             </OnsenPage>
     );
 
 }
+
+Page.contextTypes = {
+    toggleMenu: propTypes.func
+};

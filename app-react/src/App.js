@@ -20,10 +20,37 @@ import {
     List,
     ListItem
 } from "react-onsenui";
+import propTypes from "prop-types";
 
 
 
 class App extends Component {
+
+    getChildContext () {
+
+        return {
+            toggleMenu: () => this.setState( state  => ({
+                ...state,
+                isOpen: !state.isOpen
+            })) 
+        };
+
+    }
+
+    static childContextTypes = {
+        toggleMenu: propTypes.func
+    };
+
+
+    componentWillMount () {
+
+        this.setState({
+            isOpen: false
+        });
+
+    }
+
+
     render() {
         return (
             <Router
@@ -34,11 +61,11 @@ class App extends Component {
                         style={{
                             boxShadow: '0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)'
                         }}
-                        side='left'
+                        side='right'
                         width={200}
                         collapse={true}
                         isSwipeable={true}
-                        isOpen={true}
+                        isOpen={this.state.isOpen}
                     >
                         <OnsenPage>
                             <List 
