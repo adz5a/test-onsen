@@ -17,22 +17,40 @@ import {
 import {
     todoApi
 } from "./api/todolist";
-
+import Router from "./Router";
 import "onsenui/css/onsen-css-components.css";
 import "onsenui/css/onsenui.css";
+import {
+    isCordova
+} from "./env";
 
 
 const api = initApi(firebaseConfig);
 const userMiddleware = userApi(api);
 const todoMiddleware = todoApi(api);
 
+
+
 ReactDOM.render(
-    <Provider store={createStore({
-        middlewares: [
-            userMiddleware,
-            todoMiddleware
-        ]
-    })}>
-        <App />
-    </Provider>, document.getElementById('root'));
-registerServiceWorker();
+    <Provider 
+        store={createStore({
+            middlewares: [
+                userMiddleware,
+                todoMiddleware
+            ]
+        })}
+    >
+        <Router>
+            <App />
+        </Router>
+    </Provider>,
+    document.getElementById('root')
+);
+
+if ( !isCordova ) {
+
+    // cannot register service worker 
+    // while on the filesystem
+    registerServiceWorker();
+
+}

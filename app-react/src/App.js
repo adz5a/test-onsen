@@ -9,7 +9,6 @@ import {
     TodoListPage
 } from "./views/todolist/Page";
 import {
-    BrowserRouter as Router,
     Route
 } from "react-router-dom";
 import {
