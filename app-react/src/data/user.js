@@ -20,8 +20,14 @@ export const isUser = conforms({
     email: isString
 });
 
+export const isValidState = conforms({
+    uid: isString,
+    email: isString,
+    processing: isBoolean
+});
 
-export const USERACTION = partial(joinUppercase, "user");
+
+export const USERACTION = ACTIONFACTORY("user");
 
 export const LOG_USER = USERACTION("log-user");
 export const LOG_ERROR = USERACTION("log-error");
@@ -35,8 +41,21 @@ export function reducer ( state = defaultState, action ) {
         case LOG_USER:
             return {
                 ...state,
-                ...action.data
+                ...action.data,
+                processing: false
             };
+
+        case PROCESSING:
+            switch ( action.data.type ) {
+
+                case SIGN_USER:
+                case LOG_USER:
+                    return {
+                        ...state,
+                        processing: true
+                    };
+
+            }
 
         default:
             return state;
