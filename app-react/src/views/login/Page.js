@@ -1,4 +1,4 @@
-import React, { 
+import React, {
     // Component,
     // PropTypes
 } from "react";
@@ -8,7 +8,36 @@ import {
 import {
     ConnectedForm as Form
 } from "./Form";
+import {
+    ConnectedLoginUI as LoginUI
+} from "views/login/LoginUI";
+import {
+    branch,
+    compose,
+    renderComponent
+} from "recompose";
+import {
+    isLogged
+} from "data/user";
+import {
+    connect
+} from "react-redux";
 
+
+
+const WithUser = connect(
+    state => ({ user: state.user })
+);
+
+const WhenLogged = branch(
+    ( { user } ) => isLogged(user),
+    renderComponent(LoginUI),
+);
+
+const Login = compose(
+    WithUser,
+    WhenLogged,
+)(Form);
 
 export function LoginPage () {
 
@@ -24,7 +53,7 @@ export function LoginPage () {
                     paddingTop: "3em"
                 }}
             >
-                <Form />
+                <Login />
             </section>
         </Page>
 

@@ -31,7 +31,7 @@ export const isValidState = conforms({
 export const isLogged = conforms({
     uid: uid => isString(uid) && uid.length > 0,
     email: email => isString(email) && email.length > 0,
-    processing: processing => isBoolean(processing) && processing
+    processing: processing => isBoolean(processing) && processing === false
 });
 
 
