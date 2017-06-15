@@ -27,7 +27,7 @@ directory)
 
 This will build the app and put it in the app-react/build directory
 
-### Cordova
+#### Cordova
 
 Inside the app-cordova directory
 ```
