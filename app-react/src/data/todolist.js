@@ -1,12 +1,13 @@
 import { 
-    partial,
     conforms,
     isString,
     isFinite,
 } from "lodash";
-import { joinUppercase } from "./../commons";
+import {
+    ACTIONFACTORY
+} from "./commons";
 
-export const TODOACTION = partial(joinUppercase, "todo-list");
+export const TODOACTION = ACTIONFACTORY("todo-list");
 
 export const ADD_TODO = TODOACTION("add-todo");
 export const ADD_TODO_ERROR = TODOACTION("add-todo-error");

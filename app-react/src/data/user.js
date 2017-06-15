@@ -1,15 +1,17 @@
-import { partial } from "lodash";
-import { 
-    joinUppercase,
-} from "./../commons";
 import {
-        conforms,
-        isString
+    conforms,
+    isString,
+    isBoolean
 } from "lodash";
+import {
+    ACTIONFACTORY,
+    PROCESSING
+} from "./commons";
 
 const defaultState = {
     uid: null,
-    email: null
+    email: null,
+    processing: false
 };
 
 
