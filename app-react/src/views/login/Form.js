@@ -84,7 +84,6 @@ export class Form extends Component {
                 />
                 <Input 
                     type="password"
-                    float
                     placeholder="****"
                     modifier="underbar"
                     ref={ref => this.inputs.password = findDOMNode(ref)}
