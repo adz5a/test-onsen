@@ -27,7 +27,7 @@ export function HomePage () {
                     </li>
                     <li>
                         <Link to={"/todolist"}>
-                            {"You Todo List"}
+                            {"Your Todo List"}
                         </Link>
                     </li>
                 </ul>
