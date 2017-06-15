@@ -20,10 +20,18 @@ export const isUser = conforms({
     email: isString
 });
 
+
 export const isValidState = conforms({
     uid: isString,
     email: isString,
     processing: isBoolean
+});
+
+
+export const isLogged = conforms({
+    uid: uid => isString(uid) && uid.length > 0,
+    email: email => isString(email) && email.length > 0,
+    processing: processing => isBoolean(processing) && processing
 });
 
 
@@ -54,6 +62,9 @@ export function reducer ( state = defaultState, action ) {
                         ...state,
                         processing: true
                     };
+
+                default:
+                    return state;
 
             }
 
