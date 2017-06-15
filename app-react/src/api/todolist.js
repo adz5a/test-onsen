@@ -11,6 +11,10 @@ import {
 import {
     isUser
 } from "data/user";
+import {
+    PROCESSING
+} from "data/commons";
+
 
 const fromMiddleware = conforms({
     origin: value => value === "middleware"
@@ -31,8 +35,6 @@ function isSafe ( action ) {
     );
 
 }
-
-export const PROCESSING = "processing";
 
 
 function processAddTodo ( db, user, data = {} ) {
