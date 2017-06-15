@@ -4,7 +4,8 @@ import React, {
 } from "react";
 import {
     Input,
-    Button
+    Button,
+    ProgressCircular
 } from "react-onsenui";
 import { connect } from "react-redux";
 import { findDOMNode } from "react-dom";
@@ -45,7 +46,11 @@ export class Form extends Component {
             <section
                 style={{
                     textAlign: "center",
-                    padding: "1em 0 1em 0"
+                    padding: "1em 0 1em 0",
+                    display: "flex",
+                    justifyContent: "space-around",
+                    maxWidth: "65%",
+                    margin: "auto"
                 }}
             >
                 <Input 
@@ -59,10 +64,19 @@ export class Form extends Component {
                 >
                     Add
                 </Button>
+                <ProgressCircular indeterminate/>
             </section>
         );
 
     }
+
+}
+
+export function mapStateToProps ( state ) {
+
+    return {
+        todolist: state.todolist
+    };
 
 }
 

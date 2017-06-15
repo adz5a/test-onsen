@@ -1,4 +1,4 @@
-import React, { 
+import React, {
     // Component,
     // PropTypes
 } from "react";
@@ -7,12 +7,13 @@ import {
     ListItem
 } from "react-onsenui";
 import { connect } from "react-redux";
+import propTypes from "prop-types";
 
-export function List ( { todos = [] }) {
+export function List ( { todolist = { todos: [] } }) {
 
     return (
         <OnsenList
-            dataSource={todos} 
+            dataSource={todolist.todos}
             renderRow={
                 ( todo, key ) => <TodoItem
                     todo={todo}
@@ -24,11 +25,18 @@ export function List ( { todos = [] }) {
 
 }
 
+List.propTypes = {
+
+    todolist: propTypes.object
+
+};
+
+
 export function TodoItem ( { todo } ) {
 
     return (
         <ListItem>
-            <div 
+            <div
                 className="left"
             ></div>
             <div
@@ -44,10 +52,11 @@ export function TodoItem ( { todo } ) {
 
 }
 
+
 export function mapStateToProps ( state ) {
 
     return {
-        todos: state.todolist
+        todolist: state.todolist
     };
 
 }
