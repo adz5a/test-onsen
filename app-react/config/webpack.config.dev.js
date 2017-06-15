@@ -27,9 +27,11 @@ const firebaseConfig = require("./../keys/config.firebase.json");
 // It is focused on developer experience and fast rebuilds.
 // The production configuration is different and lives in a separate file.
 module.exports = {
+
     // You may want 'eval' instead if you prefer to see the compiled output in DevTools.
     // See the discussion in https://github.com/facebookincubator/create-react-app/issues/343.
     devtool: 'cheap-module-source-map',
+
     // These are the "entry points" to our application.
     // This means they will be the "root" imports that are included in JS bundle.
     // The first two entry points enable "hot" CSS and auto-refreshes for JS.
@@ -55,6 +57,7 @@ module.exports = {
         // initialization, it doesn't blow up the WebpackDevServer client, and
         // changing JS code would still trigger a refresh.
     ],
+
     output: {
         // Next line is not used in dev but WebpackDevServer crashes without it:
         path: paths.appBuild,
@@ -72,7 +75,9 @@ module.exports = {
         devtoolModuleFilenameTemplate: info =>
         path.resolve(info.absoluteResourcePath),
     },
+
     resolve: {
+
         // This allows you to set a fallback for where Webpack should look for modules.
         // We placed these paths second because we want `node_modules` to "win"
         // if there are any conflicts. This matches Node resolution mechanism.
@@ -81,17 +86,23 @@ module.exports = {
             // It is guaranteed to exist because we tweak it in `env.js`
             process.env.NODE_PATH.split(path.delimiter).filter(Boolean)
         ),
+
         // These are the reasonable defaults supported by the Node ecosystem.
         // We also include JSX as a common component filename extension to support
         // some tools, although we do not recommend using it, see:
         // https://github.com/facebookincubator/create-react-app/issues/290
         extensions: ['.js', '.json', '.jsx'],
+
         alias: {
 
             // Support React Native Web
             // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
             'react-native': 'react-native-web',
+            "views": path.resolve(paths.appSrc, "views"),
+            "data": path.resolve(paths.appSrc, "data"),
+            "api": path.resolve(paths.appSrc, "api"),
         },
+
         plugins: [
             // Prevents users from importing files from outside of src/ (or node_modules/).
             // This often causes confusion because we only process files within src/ with babel.

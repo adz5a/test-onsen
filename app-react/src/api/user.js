@@ -3,7 +3,7 @@ import {
     LOG_USER,
     SIGN_USER,
     LOG_ERROR
-} from "./../data/user";
+} from "data/user";
 import {
     conforms,
     isObject,

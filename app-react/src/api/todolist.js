@@ -2,7 +2,7 @@ import {
     ADD_TODO,
     ADD_TODO_ERROR,
     isTodo
-} from "./../data/todolist";
+} from "data/todolist";
 import {
     conforms,
     isObject,
@@ -10,7 +10,7 @@ import {
 } from "lodash";
 import {
     isUser
-} from "./../data/user";
+} from "data/user";
 
 const fromMiddleware = conforms({
     origin: value => value === "middleware"

@@ -11,7 +11,7 @@ import { findDOMNode } from "react-dom";
 import PropTypes from "prop-types";
 import {
     ADD_TODO
-} from "./../../data/todolist";
+} from "data/todolist";
 
 export class Form extends Component {
 

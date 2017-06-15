@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import {
     LoginPage
-} from "./views/login/Page";
+} from "views/login/Page";
 import {
     HomePage
-} from "./views/Home";
+} from "views/Home";
 import {
     TodoListPage
-} from "./views/todolist/Page";
+} from "views/todolist/Page";
 import {
     Route
 } from "react-router-dom";

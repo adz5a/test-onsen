@@ -4,19 +4,19 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import {
     createStore
-} from "./data/store";
+} from "data/store";
 import {
     Provider
 } from "react-redux";
 import {
     initApi
-} from "./api";
+} from "api";
 import {
     userApi
-} from "./api/user";
+} from "api/user";
 import {
     todoApi
-} from "./api/todolist";
+} from "api/todolist";
 import Router from "./Router";
 import "onsenui/css/onsen-css-components.css";
 import "onsenui/css/onsenui.css";

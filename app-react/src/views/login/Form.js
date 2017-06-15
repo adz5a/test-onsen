@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 import {
     LOG_USER,
     SIGN_USER
-} from "./../../data/user";
+} from "data/user";
 import PropTypes from "prop-types";
 
 
