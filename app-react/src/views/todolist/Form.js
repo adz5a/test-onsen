@@ -1,4 +1,4 @@
-import React, { 
+import React, {
     Component,
     // PropTypes
 } from "react";
@@ -17,7 +17,8 @@ import {
 export class Form extends Component {
 
     static propTypes = {
-        onAdd: PropTypes.func
+        onAdd: PropTypes.func,
+        processing: PropTypes.bool
     };
 
     componentWillMount () {
@@ -53,18 +54,27 @@ export class Form extends Component {
                     margin: "auto"
                 }}
             >
-                <Input 
+                <Input
                     type="text"
                     placeholder="a lot of stuff to do"
                     ref={ ref => this.inputs.todo = findDOMNode(ref)}
                 />
-                <Button 
+                <Button
                     onClick={this.onAdd}
                     type="submit"
                 >
                     Add
                 </Button>
-                <ProgressCircular indeterminate/>
+                <span
+                    style={{
+                        display: "inline-block",
+                        visibility: this.props.processing ? "visible" : "hidden"
+                    }}
+                >
+                    <ProgressCircular
+                        indeterminate
+                    />
+                </span>
             </section>
         );
 
@@ -75,7 +85,7 @@ export class Form extends Component {
 export function mapStateToProps ( state ) {
 
     return {
-        todolist: state.todolist
+        processing: state.todolist.processing
     };
 
 }
