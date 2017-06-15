@@ -16,7 +16,6 @@ export function goBack () {
 }
 
 
-
 export function createToolbar ( {
     title,
     hasBackButton,

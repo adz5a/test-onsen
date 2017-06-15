@@ -31,7 +31,7 @@ class App extends Component {
             toggleMenu: () => this.setState( state  => ({
                 ...state,
                 isOpen: !state.isOpen
-            })) 
+            }))
         };
 
     }
@@ -47,52 +47,71 @@ class App extends Component {
             isOpen: false
         });
 
+        this.onOpen = () => this.setState(state => ({
+
+            ...state,
+            isOpen: true
+
+        }));
+        this.onClose = () => this.setState(state => ({
+
+            ...state,
+            isOpen: false
+
+        }));
+
     }
+
+
+    componentWillUpdate ( _, nextState ) {
+
+        console.log(this.state.isOpen, nextState.isOpen);
+
+    }
+
 
 
     render() {
         return (
-            <Router
-                forceRefresh={false}
-            >
-                <Splitter>
-                    <SplitterSide
-                        style={{
-                            boxShadow: '0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)'
-                        }}
-                        side='right'
-                        width={200}
-                        collapse={true}
-                        isSwipeable={true}
-                        isOpen={this.state.isOpen}
-                    >
-                        <OnsenPage>
-                            <List 
-                                dataSource={["Profile", "Settings"]}
-                                renderRow={
-                                    (data, index) => <ListItem key={index}>{data}</ListItem>
-                                        
-                                }
-                            />
-                        </OnsenPage>
-                    </SplitterSide>
-                    <SplitterContent>
-                        <Route 
-                            path="/"
-                            exact={true}
-                            component={HomePage}
+            <Splitter>
+                <SplitterSide
+                    style={{
+                        boxShadow: '0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)'
+                    }}
+                    side='right'
+                    width={200}
+                    collapse={true}
+                    isSwipeable={true}
+                    isOpen={this.state.isOpen}
+                    onClose={this.onClose}
+                    onOpen={this.onOpen}
+                >
+                    <OnsenPage>
+                        <List
+                            dataSource={["Profile", "Settings"]}
+                            renderRow={
+                                (data, index) => <ListItem key={index}>{data}</ListItem>
+
+                            }
                         />
-                        <Route 
-                            component={LoginPage}
-                            path="/login"
-                        />
-                        <Route 
-                            component={TodoListPage}
-                            path="/todolist"
-                        />
-                    </SplitterContent>
+                    </OnsenPage>
+                </SplitterSide>
+                <SplitterContent>
+                    <Route
+                        path="/"
+                        exact={true}
+                        component={HomePage}
+                    />
+                    <Route
+                        component={LoginPage}
+                        path="/login"
+                    />
+                    <Route
+                        component={TodoListPage}
+                        path="/todolist"
+                    />
+                </SplitterContent>
             </Splitter>
-        </Router>
         );
     }
 }
