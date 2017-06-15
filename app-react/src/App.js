@@ -63,14 +63,6 @@ class App extends Component {
     }
 
 
-    componentWillUpdate ( _, nextState ) {
-
-        console.log(this.state.isOpen, nextState.isOpen);
-
-    }
-
-
-
     render() {
         return (
             <Splitter>
