@@ -31,7 +31,9 @@ export function LoginUI ( { 
 
             <Button
                 onClick={onLogout}
-            >Log out</Button>
+            >
+                Log out
+            </Button>
         </Card>
     );
 

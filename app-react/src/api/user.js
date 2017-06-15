@@ -11,8 +11,9 @@ import {
     defaults,
     pick
 } from "lodash";
-
-export const PROCESSING = "processing";
+import {
+    PROCESSING
+} from "data/commons";
 
 const fromMiddleware = conforms({
     origin: value => value === "middleware"
@@ -77,6 +78,11 @@ export function processUserSignInRequest( auth, creds ) {
 
 }
 
+export function processUserUnlogRequest ( auth ) {
+
+    return auth.signOut();
+
+}
 
 export function userApi ( app ) {
 
@@ -155,8 +161,6 @@ export function userApi ( app ) {
                     if ( isSafe(action) ) {
 
 
-                        console.debug("processing");
-
                         processUserSignInRequest( auth, action.data )
                             .then(
                                 user => store.dispatch({
@@ -184,6 +188,35 @@ export function userApi ( app ) {
 
                     }
 
+                case UNLOG_USER:
+                    if ( isSafe(action) ) {
+
+                        processUserUnlogRequest( auth )
+                            .then(
+                                () => store.dispatch({
+                                    type: UNLOG_USER,
+                                    data: null,
+                                    meta: meta()
+                                }),
+                                error => store.dispatch({
+                                    type: LOG_ERROR,
+                                    meta: meta(),
+                                    data: error
+                                })
+                            )
+                            .catch(console.error);
+
+                        return next({
+                            type: PROCESSING,
+                            data: action,
+                            meta: meta()
+                        });
+
+                    } else {
+
+                        return next(action);
+
+                    }
                 default:
                     return next(action);
 

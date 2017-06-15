@@ -2,7 +2,8 @@ import React, { Component,  } from "react";
 import { findDOMNode } from "react-dom";
 import {
     Input,
-    Button
+    Button,
+    ProgressCircular
 } from "react-onsenui";
 import { connect } from "react-redux";
 import {
@@ -17,6 +18,7 @@ export class Form extends Component {
     static propTypes = {
         onSignIn: PropTypes.func,
         onLogin: PropTypes.func,
+        processing: PropTypes.bool
     };
 
     componentWillMount () {
@@ -102,9 +104,18 @@ export class Form extends Component {
                     onClick={this.onSignIn}
                 >SignIn</Button>
             </section>
+            <section
+                style={{
+                    justifyContent: "center",
+                    marginTop: "2em",
+                    display: this.props.processing ? "flex" : "none"
+                }}
+            >
+                <ProgressCircular indeterminate/>
+            </section>
+
         </form>
         );
-
 
 
     }
@@ -133,5 +144,17 @@ export function mapDispatchToProps ( dispatch ) {
 
 }
 
-export const ConnectedForm = connect(null, mapDispatchToProps)(Form);
+export function mapStateToProps ( state ) {
 
+    return {
+
+        processing: state.user.processing
+
+    }
+
+}
+
+export const ConnectedForm = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Form);

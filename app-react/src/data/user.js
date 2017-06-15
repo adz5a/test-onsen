@@ -42,6 +42,7 @@ export const LOG_ERROR = USERACTION("log-error");
 export const UNLOG_USER = USERACTION("unlog-user");
 export const SIGN_USER = USERACTION("sign-user");
 
+
 export function reducer ( state = defaultState, action ) {
 
     switch ( action.type ) {
@@ -52,6 +53,9 @@ export function reducer ( state = defaultState, action ) {
                 ...action.data,
                 processing: false
             };
+
+        case UNLOG_USER:
+            return defaultState;
 
         case PROCESSING:
             switch ( action.data.type ) {
