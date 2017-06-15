@@ -1,11 +1,5 @@
 import React from "react";
 import {
-    connect
-} from "react-redux";
-import {
-    isLogged
-} from "data/user";
-import {
     Card
 } from "react-onsenui";
 import {
@@ -13,9 +7,6 @@ import {
 } from "react-router-dom";
 
 
-const WithUser = connect(
-    state => ({ user: state.user })
-);
 
 export function Unauthorized () {
 
