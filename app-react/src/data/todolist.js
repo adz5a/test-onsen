@@ -1,7 +1,6 @@
 import { 
     conforms,
     isString,
-    isFinite,
 } from "lodash";
 import {
     ACTIONFACTORY
