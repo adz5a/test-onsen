@@ -1,11 +1,14 @@
-import React, { 
+import React, {
     // Component,
     // PropTypes
 } from "react";
 import {
     Card,
-    Button
-} from "react-onsenui";
+    CardHeader,
+    CardActions,
+    CardText
+} from "material-ui/Card";
+import RaisedButton from "material-ui/RaisedButton";
 import {
     noop
 } from "lodash";
@@ -24,16 +27,21 @@ export function LoginUI ( { 
 
     return (
         <Card>
-            <h1>Thanks for logging in</h1>
-            <p>
-                {`Your email : ${user.email || ""}`}
-            </p>
 
-            <Button
-                onClick={onLogout}
-            >
-                Log out
-            </Button>
+            <CardHeader
+                title="Thanks for logging in"
+            />
+            <CardText>
+                {"Your email: "}
+            </CardText>
+            <CardActions>
+                <RaisedButton
+                    secondary={true}
+                    onClick={onLogout}
+                >
+                    Log out
+                </RaisedButton>
+            </CardActions>
         </Card>
     );
 
