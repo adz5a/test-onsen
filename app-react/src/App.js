@@ -11,15 +11,12 @@ import {
 import {
     Route
 } from "react-router-dom";
-import {
-    Splitter,
-    SplitterSide,
-    SplitterContent,
-    Page as OnsenPage,
-    List,
-    ListItem
-} from "react-onsenui";
+import MenuItem from "material-ui/MenuItem";
+import Drawer from "material-ui/Drawer";
+import CloseIcon from "material-ui/svg-icons/content/clear";
+import IconButton from "material-ui/IconButton";
 import propTypes from "prop-types";
+
 
 
 
@@ -47,12 +44,6 @@ class App extends Component {
             isOpen: false
         });
 
-        this.onOpen = () => this.setState(state => ({
-
-            ...state,
-            isOpen: true
-
-        }));
         this.onClose = () => this.setState(state => ({
 
             ...state,
@@ -65,30 +56,25 @@ class App extends Component {
 
     render() {
         return (
-            <Splitter>
-                <SplitterSide
-                    style={{
-                        boxShadow: '0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)'
-                    }}
-                    side='right'
-                    width={200}
-                    collapse={true}
-                    isSwipeable={true}
-                    isOpen={this.state.isOpen}
-                    onClose={this.onClose}
-                    onOpen={this.onOpen}
+            <section>
+                <Drawer
+                    open={this.state.isOpen}
+                    openSecondary={true}
                 >
-                    <OnsenPage>
-                        <List
-                            dataSource={["Profile", "Settings"]}
-                            renderRow={
-                                (data, index) => <ListItem key={index}>{data}</ListItem>
-
-                            }
-                        />
-                    </OnsenPage>
-                </SplitterSide>
-                <SplitterContent>
+                    <div>
+                        <IconButton
+                            style={{
+                                textAlign: "right"
+                            }}
+                            onClick={this.onClose}
+                        >
+                            <CloseIcon />
+                        </IconButton>
+                    </div>
+                    <MenuItem>yolo</MenuItem>
+                    <MenuItem>Yola</MenuItem>
+                </Drawer>
+                <section>
                     <Route
                         path="/"
                         exact={true}
@@ -102,8 +88,8 @@ class App extends Component {
                         component={TodoListPage}
                         path="/todolist"
                     />
-                </SplitterContent>
-            </Splitter>
+                </section>
+            </section>
         );
     }
 }
