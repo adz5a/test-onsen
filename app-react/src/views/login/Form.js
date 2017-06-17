@@ -73,15 +73,18 @@ export class Form extends Component {
                 }}
                 ref={ ref => this.form = ref }
             >
-                <section>
+                <section
+                    style={{
+                        display: "flex",
+                        justifyContent: "space-around",
+                        flexWrap: "wrap"
+                    }}
+                >
                     <TextField
                         name="email"
                         type="email"
                         placeholder="xyz@yolo.gmail.com"
                         id="LOGINFORM-EMAIL"
-                        style={{
-                            marginRight: "1em"
-                        }}
                         autoComplete="off"
                     />
                     <TextField
@@ -89,9 +92,6 @@ export class Form extends Component {
                         type="password"
                         placeholder="****"
                         id="LOGINFORM-PASSWORD"
-                        style={{
-                            marginLeft: "1em"
-                        }}
                         autoComplete="off"
                     />
                 </section>
