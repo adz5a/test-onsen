@@ -1,4 +1,4 @@
-import { 
+import {
     conforms,
     isString,
 } from "lodash";
@@ -18,6 +18,7 @@ export const STATUS_DELETED = TODOSTATUS("deleted");
 
 export const ADD_TODO = TODOACTION("add-todo");
 export const ADD_TODO_ERROR = TODOACTION("add-todo-error");
+export const TOGGLE_TODO = TODOACTION("toggle-todo");
 
 const defaultState = {
     processing: false,
@@ -41,6 +42,29 @@ export function byId ( state = {}, todo ) {
     };
 }
 
+export function toggleTodo ( state = {}, todo ) {
+
+    const prevTodo = state[todo.id];
+    if ( !prevTodo ) {
+
+        return state;
+
+    } else {
+
+        return {
+            ...state,
+            [ todo.id ]: {
+                ...prevTodo,
+                status: prevTodo.status === STATUS_ON ?
+                STATUS_OFF:
+                STATUS_ON
+            }
+        };
+
+    }
+
+}
+
 
 export function reducer ( state = defaultState, action ) {
 
@@ -52,6 +76,15 @@ export function reducer ( state = defaultState, action ) {
                 byId: byId(state.byId, action.data),
                 processing: false
             };
+
+
+        case TOGGLE_TODO:
+            return {
+                ...state,
+                byId: toggleTodo(state.byId, action.data),
+                processing: false
+            }
+
 
         case PROCESSING:
             switch ( action.data.type ) {

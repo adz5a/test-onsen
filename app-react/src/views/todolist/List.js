@@ -6,38 +6,56 @@ import {
     List as MaterialList,
     ListItem
 } from "material-ui/List";
+import {
+    TOGGLE_TODO,
+    STATUS_OFF
+} from "data/todolist";
 import { map } from "lodash";
 import { connect } from "react-redux";
 import propTypes from "prop-types";
 import moment from "moment";
+import { noop } from "lodash";
 
 
 const dateStyle = {
     float: "right",
     fontSize: "0.8em"
 }
-function renderTodo ( todo, index ) {
+
+const todoStyle = {}
+function renderTodo ( onToggle ) {
+
+    return ( todo, index ) => {
+
+        const {
+            todo: content,
+            date
+        } = todo;
 
 
-    const {
-        todo: content,
-        date
-    } = todo;
-
-
-    return (
-        <ListItem
-            key={index}
-        >
-            <span>{ content }</span>
-            <span
-                style={dateStyle}
+        return (
+            <ListItem
+                key={index}
+                onClick={
+                    () => onToggle(todo)
+                }
+                style={{
+                    ...todoStyle,
+                    backgroundColor: todo.status === STATUS_OFF ?
+                    "lightgrey" :
+                    ""
+                }}
             >
-                { moment(date).fromNow() }
-            </span>
-        </ListItem>
-    );
+                <span>{ content }</span>
+                <span
+                    style={dateStyle}
+                >
+                    { moment(date).fromNow() }
+                </span>
+            </ListItem>
+        );
 
+    }
 }
 
 const listStyle = {
@@ -46,8 +64,14 @@ const listStyle = {
     paddingRight: "5em",
 
 };
-export function List ( { todolist = { todos: [] } }) {
+export function List ( props ) {
 
+    const {
+        todolist,
+        onToggle = noop
+    } = props;
+
+console.log(props);
     return (
         <section
             style={listStyle}
@@ -56,7 +80,7 @@ export function List ( { todolist = { todos: [] } }) {
                 {
                     map(
                         todolist.todos,
-                        renderTodo
+                        renderTodo(onToggle)
                     )
                 }
             </MaterialList>
@@ -67,7 +91,8 @@ export function List ( { todolist = { todos: [] } }) {
 
 List.propTypes = {
 
-    todolist: propTypes.object
+    todolist: propTypes.object,
+    onToggle: propTypes.func
 
 };
 
@@ -106,4 +131,22 @@ export function mapStateToProps ( state ) {
 
 }
 
-export const ConnectedList = connect(mapStateToProps)(List);
+export function mapDispatchToProps ( dispatch ) {
+
+    return {
+        onToggle ( todo ) {
+
+            return dispatch({
+                type: TOGGLE_TODO,
+                data: todo
+            });
+
+        }
+    }
+
+}
+
+export const ConnectedList = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(List);
