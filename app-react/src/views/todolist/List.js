@@ -23,18 +23,27 @@ function renderTodo ( todo, index ) {
 
 }
 
+const listStyle = {
 
+    paddingLeft: "5em",
+    paddingRight: "5em",
+
+};
 export function List ( { todolist = { todos: [] } }) {
 
     return (
-        <MaterialList>
-            {
-                map(
-                    todolist.todos,
-                    renderTodo
-                )
-            }
-        </MaterialList>
+        <section
+            style={listStyle}
+        >
+            <MaterialList>
+                {
+                    map(
+                        todolist.todos,
+                        renderTodo
+                    )
+                }
+            </MaterialList>
+        </section>
     );
 
 }

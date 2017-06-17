@@ -23,7 +23,7 @@ const defaultState = {
 export const isTodo = conforms({
     todo: isString,
     id: isString,
-    date: isFinite,
+    date: isString,
 
 });
 

@@ -12,6 +12,7 @@ import {
 } from "./todolist";
 
 
+
 export function createStore ( {
     middlewares = []
 } = {}) {
@@ -26,7 +27,23 @@ export function createStore ( {
 
     if ( process.env.NODE_ENV !== "production" ) {
 
+        const { ADD_TODO_ERROR } = require("./todolist");
+        const { LOG_ERROR } = require("./user");
+
         composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+        const { createLogger } = require("redux-logger");
+        const logger = createLogger({
+            predicate: (_, action ) => {
+
+                return (
+                    action.type === LOG_ERROR ||
+                    action.type === ADD_TODO_ERROR
+                );
+
+            }
+        });
+
+        middlewares = [ logger, ...middlewares ];
 
     }
 

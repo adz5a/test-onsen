@@ -28,7 +28,7 @@ export class Form extends Component {
 
                 this.props.onAdd({
                     todo: e.target.elements.todo.value,
-                    date: Date.now()
+                    date: (new Date()).toISOString()
                 });
 
             }
