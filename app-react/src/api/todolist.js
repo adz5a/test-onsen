@@ -181,7 +181,7 @@ export function todoApi ( app ) {
                                 }),
                                 error => store.dispatch({
                                     type: ADD_TODO_ERROR,
-                                    meta: meta(),
+                                    meta: meta({ action }),
                                     data: error
                                 })
                             )

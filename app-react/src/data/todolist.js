@@ -10,6 +10,11 @@ import {
 } from "./commons";
 
 export const TODOACTION = ACTIONFACTORY("todo-list");
+export const TODOSTATUS = ACTIONFACTORY("todo-status");
+
+export const STATUS_ON = TODOSTATUS("on");
+export const STATUS_OFF = TODOSTATUS("off");
+export const STATUS_DELETED = TODOSTATUS("deleted");
 
 export const ADD_TODO = TODOACTION("add-todo");
 export const ADD_TODO_ERROR = TODOACTION("add-todo-error");
@@ -23,7 +28,10 @@ export const isTodo = conforms({
     todo: isString,
     id: isString,
     date: isString,
-
+    status: status => (
+        isString(status) &&
+        [ STATUS_ON, STATUS_OFF, STATUS_DELETED ].includes(status)
+    )
 });
 
 export function byId ( state = {}, todo ) {

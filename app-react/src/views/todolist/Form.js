@@ -8,7 +8,8 @@ import RaisedButton from "material-ui/RaisedButton";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import {
-    ADD_TODO
+    ADD_TODO,
+    STATUS_ON
 } from "data/todolist";
 
 export class Form extends Component {
@@ -95,12 +96,19 @@ export function mapStateToProps ( state ) {
 
 export function mapDispatchToProps ( dispatch ) {
 
+
+    console.log(STATUS_ON);
+
+
     return {
         onAdd ( todo ) {
 
             return dispatch({
                 type: ADD_TODO,
-                data: todo
+                data: {
+                    ...todo,
+                    status: STATUS_ON
+                },
             });
 
         }
