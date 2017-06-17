@@ -1,10 +1,12 @@
 import React, { Component,  } from "react";
-import { findDOMNode } from "react-dom";
-import {
-    Input,
-    Button,
-    ProgressCircular
-} from "react-onsenui";
+// import {
+//     Input,
+//     Button,
+//     ProgressCircular
+// } from "react-onsenui";
+import CircularProgress from "material-ui/CircularProgress";
+import TextField from "material-ui/TextField";
+import RaisedButton from "material-ui/RaisedButton";
 import { connect } from "react-redux";
 import {
     LOG_USER,
@@ -25,12 +27,10 @@ export class Form extends Component {
 
         this.onButtonClicked = () => {
 
-            console.log(this.inputs.email);
             const creds = {
-                email: this.inputs.email.value,
-                password: this.inputs.password.value,
+                email: this.form.elements.email.value,
+                password: this.form.elements.password.value,
             };
-            console.log(creds);
             return creds;
 
         }
@@ -56,7 +56,7 @@ export class Form extends Component {
 
         }
 
-        this.inputs = {};
+        this.form = null;
     }
 
     componentWillUpdate () {}
@@ -71,22 +71,17 @@ export class Form extends Component {
                     justifyContent: "center",
                     padding: "0 1em 0 1em"
                 }}
-                onSubmit={
-                    e => console.log(e)
-                }
+                ref={ ref => this.form = ref }
             >
-                <Input 
+                <TextField 
+                    name="email"
                     type="email"
-                    float
                     placeholder="xyz@yolo.gmail.com"
-                    modifier="underbar"
-                    ref={ref => this.inputs.email = findDOMNode(ref)}
                 />
-                <Input 
+                <TextField 
+                    name="password"
                     type="password"
                     placeholder="****"
-                    modifier="underbar"
-                    ref={ref => this.inputs.password = findDOMNode(ref)}
                 />
 
             <section
@@ -96,12 +91,16 @@ export class Form extends Component {
                     marginTop: "2em"
                 }}
             >
-                <Button type="submit"
+                <RaisedButton 
                     onClick={this.onLogin}
-                >Login</Button>
-                <Button type="submit"
+                >
+                    Login
+                </RaisedButton>
+                <RaisedButton
                     onClick={this.onSignIn}
-                >SignIn</Button>
+                >
+                    SignIn
+                </RaisedButton>
             </section>
             <section
                 style={{
@@ -110,7 +109,7 @@ export class Form extends Component {
                     display: this.props.processing ? "flex" : "none"
                 }}
             >
-                <ProgressCircular indeterminate/>
+                <CircularProgress size={60}/>
             </section>
 
         </form>
