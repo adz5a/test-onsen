@@ -9,7 +9,9 @@ import {
     defaults,
 } from "lodash";
 import {
-    isUser
+    isUser,
+    isLogged,
+    LOG_USER
 } from "data/user";
 import {
     PROCESSING
@@ -28,7 +30,7 @@ function isSafe ( action ) {
 
     return (
         isObject(action) &&
-        ( 
+        (
             !isObject(action.meta ) ||
             ( isObject(action.meta) && !fromMiddleware(action.meta) )
         )
@@ -39,16 +41,20 @@ function isSafe ( action ) {
 
 function processAddTodo ( db, user, data = {} ) {
 
-    if ( !isUser(user) || !isObject(data)) {
+
+    const refString = getUserTodoRef(user);
+
+
+    if ( !isUser(user) || !isObject(data) || !refString ) {
 
         return Promise.reject(
             new Error("Must have a valid user and valid todo")
         );
 
     } else {
-        console.debug("yoli");
 
-        const ref = db.ref("users/" + user.uid + "/todos");
+        const ref = db.ref(refString);
+
         const id = ref.push().key;
 
         const todo = {
@@ -73,20 +79,90 @@ function processAddTodo ( db, user, data = {} ) {
 }
 
 
+export function getUserTodoRef ( user ) {
+
+    if ( !isUser(user) || !isLogged(user) ) {
+
+        return null;
+
+    } else {
+
+        return "todos/" + user.uid;
+
+    }
+
+}
+
+
+export function startup ( db, user, store ) {
+
+    const refString = getUserTodoRef(user);
+
+    if ( !refString ) {
+
+        throw new Error("cannot find todos for an unlogged user");
+
+    } else {
+
+        return db.ref(refString)
+            .on("child_added", ( snap, previousChildKey ) => {
+
+                store.dispatch({
+                    type: ADD_TODO,
+                    data: snap.val(),
+                    meta: meta()
+                });
+
+            });
+
+    }
+
+}
 
 export function todoApi ( app ) {
 
     const database = app.database();
+    let unsubscribe;
 
     return function todoApiMiddleware ( store ) {
 
 
-        
+
 
 
         return next => action => {
 
             switch ( action.type ) {
+
+
+                case LOG_USER:{
+
+                    const prevState = store.getState();
+                    const returnValue = next(action);
+                    const nextState = store.getState();
+
+                    if (
+                        !isLogged(prevState.user) &&
+                        isLogged(nextState.user)
+                    ) {
+
+                        try {
+                            unsubscribe = startup(
+                                database,
+                                nextState.user,
+                                store
+                            );
+                        } catch (e) {
+                            console.error(e);
+                        }
+
+                    }
+
+                    return returnValue;
+
+                }
+
+
 
                 case ADD_TODO:
                     if ( isSafe(action) ) {
