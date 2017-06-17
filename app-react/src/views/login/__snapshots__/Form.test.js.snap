@@ -237,7 +237,7 @@ exports[`matches snapshot 1`] = `
         style={
           Object {
             "WebkitTapHighlightColor": "rgba(0, 0, 0, 0)",
-            "backgroundColor": "#ffffff",
+            "backgroundColor": "#00bcd4",
             "border": 10,
             "borderRadius": 2,
             "boxSizing": "border-box",
@@ -325,7 +325,7 @@ exports[`matches snapshot 1`] = `
         style={
           Object {
             "WebkitTapHighlightColor": "rgba(0, 0, 0, 0)",
-            "backgroundColor": "#ffffff",
+            "backgroundColor": "#ff4081",
             "border": 10,
             "borderRadius": 2,
             "boxSizing": "border-box",

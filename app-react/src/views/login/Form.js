@@ -74,7 +74,7 @@ export class Form extends Component {
                 ref={ ref => this.form = ref }
             >
                 <section>
-                    <TextField 
+                    <TextField
                         name="email"
                         type="email"
                         placeholder="xyz@yolo.gmail.com"
@@ -84,7 +84,7 @@ export class Form extends Component {
                         }}
                         autoComplete="off"
                     />
-                    <TextField 
+                    <TextField
                         name="password"
                         type="password"
                         placeholder="****"
@@ -102,12 +102,14 @@ export class Form extends Component {
                     marginTop: "2em"
                 }}
             >
-                <RaisedButton 
+                <RaisedButton
+                    primary={true}
                     onClick={this.onLogin}
                 >
                     Login
                 </RaisedButton>
                 <RaisedButton
+                    secondary={true}
                     onClick={this.onSignIn}
                 >
                     SignIn
