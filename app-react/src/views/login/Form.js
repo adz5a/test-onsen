@@ -73,17 +73,28 @@ export class Form extends Component {
                 }}
                 ref={ ref => this.form = ref }
             >
-                <TextField 
-                    name="email"
-                    type="email"
-                    placeholder="xyz@yolo.gmail.com"
-                />
-                <TextField 
-                    name="password"
-                    type="password"
-                    placeholder="****"
-                />
-
+                <section>
+                    <TextField 
+                        name="email"
+                        type="email"
+                        placeholder="xyz@yolo.gmail.com"
+                        id="LOGINFORM-EMAIL"
+                        style={{
+                            marginRight: "1em"
+                        }}
+                        autoComplete="off"
+                    />
+                    <TextField 
+                        name="password"
+                        type="password"
+                        placeholder="****"
+                        id="LOGINFORM-PASSWORD"
+                        style={{
+                            marginLeft: "1em"
+                        }}
+                        autoComplete="off"
+                    />
+                </section>
             <section
                 style={{
                     display: "flex",
