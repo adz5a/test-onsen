@@ -2,13 +2,10 @@ import React, {
     Component,
     // PropTypes
 } from "react";
-import {
-    Input,
-    Button,
-    ProgressCircular
-} from "react-onsenui";
+import CircularProgress from "material-ui/CircularProgress";
+import TextField from "material-ui/TextField";
+import RaisedButton from "material-ui/RaisedButton";
 import { connect } from "react-redux";
-import { findDOMNode } from "react-dom";
 import PropTypes from "prop-types";
 import {
     ADD_TODO
@@ -24,12 +21,13 @@ export class Form extends Component {
     componentWillMount () {
 
         this.inputs = {};
-        this.onAdd = () => {
+        this.onAdd = (e) => {
 
+            e.preventDefault();
             if ( typeof this.props.onAdd === "function" ) {
 
                 this.props.onAdd({
-                    todo: this.inputs.todo.value,
+                    todo: e.target.elements.todo.value,
                     date: Date.now()
                 });
 
@@ -54,25 +52,29 @@ export class Form extends Component {
                     margin: "auto"
                 }}
             >
-                <Input
-                    type="text"
-                    placeholder="a lot of stuff to do"
-                    ref={ ref => this.inputs.todo = findDOMNode(ref)}
-                />
-                <Button
-                    onClick={this.onAdd}
-                    type="submit"
+                <form
+                    onSubmit={this.onAdd}
                 >
-                    Add
-                </Button>
+                    <TextField
+                        type="text"
+                        placeholder="a lot of stuff to do"
+                        name="todo"
+                        id="TODOLIST-ADDFORM"
+                    />
+                    <RaisedButton
+                        type="submit"
+                    >
+                        Add
+                    </RaisedButton>
+                </form>
                 <span
                     style={{
                         display: "inline-block",
                         visibility: this.props.processing ? "visible" : "hidden"
                     }}
                 >
-                    <ProgressCircular
-                        indeterminate
+                    <CircularProgress
+                        size={60}
                     />
                 </span>
             </section>
