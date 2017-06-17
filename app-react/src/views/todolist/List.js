@@ -69,8 +69,13 @@ export function TodoItem ( { todo } ) {
 
 export function mapStateToProps ( state ) {
 
+    const ids = Object.keys(state.todolist.byId);
+    const todolist = state.todolist;
     return {
-        todolist: state.todolist
+        todolist: {
+            todos: map(ids, id => todolist.byId[id]),
+            processing: state.todolist.processing
+        }
     };
 
 }

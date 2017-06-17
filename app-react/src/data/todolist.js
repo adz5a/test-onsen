@@ -16,8 +16,8 @@ export const ADD_TODO = TODOACTION("add-todo");
 export const ADD_TODO_ERROR = TODOACTION("add-todo-error");
 
 const defaultState = {
-    todos: [],
-    processing: false
+    processing: false,
+    byId: {}
 };
 
 export const isTodo = conforms({
@@ -27,6 +27,13 @@ export const isTodo = conforms({
 
 });
 
+export function byId ( state = {}, todo ) {
+    return {
+        ...state,
+        [ todo.id ]: todo
+    };
+}
+
 
 export function reducer ( state = defaultState, action ) {
 
@@ -35,10 +42,7 @@ export function reducer ( state = defaultState, action ) {
         case ADD_TODO:
             return {
                 ...state,
-                todos: [
-                    action.data,
-                    ...state.todos
-                ],
+                byId: byId(state.byId, action.data),
                 processing: false
             };
 
