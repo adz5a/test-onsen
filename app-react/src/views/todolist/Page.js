@@ -15,6 +15,10 @@ import {
     isLogged
 } from "data/user";
 import {
+    STATUS_ON,
+    STATUS_OFF
+} from "data/todolist";
+import {
     Unauthorized
 } from "./Unauthorized";
 import {
@@ -25,14 +29,46 @@ import {
 import {
     connect
 } from "react-redux";
+import {
+    Tabs,
+    Tab
+} from "material-ui/Tabs";
 
-
+const todoListStyle = {
+    paddingLeft: "5em",
+    paddingRight: "5em"
+};
 function TodoList () {
 
     return (
         <section>
             <Form />
-            <List />
+            <section
+                style={todoListStyle}
+            >
+                <Tabs>
+                    <Tab
+                        label="All"
+                    >
+                        <List
+                        />
+                    </Tab>
+                    <Tab
+                        label="Actives"
+                    >
+                        <List
+                            status={STATUS_ON}
+                        />
+                    </Tab>
+                    <Tab
+                        label="Inactives"
+                    >
+                        <List
+                            status={STATUS_OFF}
+                        />
+                    </Tab>
+                </Tabs>
+            </section>
         </section>
     );
 

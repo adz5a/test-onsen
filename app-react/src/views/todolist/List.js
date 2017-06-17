@@ -8,13 +8,18 @@ import {
 } from "material-ui/List";
 import {
     TOGGLE_TODO,
-    STATUS_OFF
+    STATUS_OFF,
+    STATUS_ON
 } from "data/todolist";
 import { map } from "lodash";
 import { connect } from "react-redux";
 import propTypes from "prop-types";
 import moment from "moment";
-import { noop } from "lodash";
+import {
+    noop,
+    identity,
+    filter
+} from "lodash";
 
 
 const dateStyle = {
@@ -68,10 +73,19 @@ export function List ( props ) {
 
     const {
         todolist,
-        onToggle = noop
+        onToggle = noop,
+        status = ""
     } = props;
 
-console.log(props);
+    let _todos = todolist.todos;
+    if ( status === STATUS_OFF || status === STATUS_ON ) {
+
+        _todos = filter(
+            todolist.todos,
+            todo => status === todo.status
+        );
+
+    }
     return (
         <section
             style={listStyle}
@@ -79,7 +93,7 @@ console.log(props);
             <MaterialList>
                 {
                     map(
-                        todolist.todos,
+                        _todos,
                         renderTodo(onToggle)
                     )
                 }
@@ -92,7 +106,8 @@ console.log(props);
 List.propTypes = {
 
     todolist: propTypes.object,
-    onToggle: propTypes.func
+    onToggle: propTypes.func,
+    filter: propTypes.string
 
 };
 
