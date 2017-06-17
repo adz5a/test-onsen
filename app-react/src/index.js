@@ -21,7 +21,8 @@ import Router from "./Router";
 import "onsenui/css/onsen-css-components.css";
 import "onsenui/css/onsenui.css";
 import {
-    isCordova
+    isCordova,
+    isProduction
 } from "./env";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import reactTapEventPlugin from "react-tap-event-plugin";
@@ -52,7 +53,7 @@ ReactDOM.render(
     document.getElementById('root')
 );
 
-if ( !isCordova ) {
+if ( !isCordova || !isProduction ) {
 
     // cannot register service worker 
     // while on the filesystem
