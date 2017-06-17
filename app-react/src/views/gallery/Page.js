@@ -7,6 +7,9 @@ import {
 } from "./../Page";
 import {
 } from "recompose";
+import {
+    Dragger
+} from "./Dragger";
 
 export function GalleryPage () {
 
@@ -19,9 +22,11 @@ export function GalleryPage () {
                 style={{
                     maxWidth: "80%",
                     margin: "auto",
-                    paddingTop: "3em"
+                    paddingTop: "3em",
+                    height: "100%"
                 }}
             >
+                <Dragger />
             </section>
         </Page>
 
