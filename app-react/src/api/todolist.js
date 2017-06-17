@@ -1,7 +1,9 @@
 import {
     ADD_TODO,
     ADD_TODO_ERROR,
-    isTodo
+    isTodo,
+    UPDATED_DISTANT_STATE,
+    UPDATED_DISTANT_STATE_ERROR
 } from "data/todolist";
 import {
     conforms,
@@ -94,6 +96,32 @@ export function getUserTodoRef ( user ) {
 }
 
 
+export function updateWholeState ( db, user, todolist ) {
+
+    if ( !isUser(user) || !isLogged(user) ) {
+
+        return Promise.reject(
+            new Error("Cannot update state for unlogged user")
+        );
+
+    } else {
+
+        return new Promise(( resolve, reject ) => {
+
+            const refString = getUserTodoRef(user);
+
+            const res = db.ref(refString).set(todolist.byId);
+
+            resolve(res);
+
+        });
+
+    }
+
+}
+
+
+
 export function startup ( db, user, store ) {
 
     const refString = getUserTodoRef(user);
@@ -125,9 +153,6 @@ export function todoApi ( app ) {
     let unsubscribe;
 
     return function todoApiMiddleware ( store ) {
-
-
-
 
 
         return next => action => {
@@ -206,9 +231,42 @@ export function todoApi ( app ) {
 
 
 
-                default:
-                    return next(action);
+                default: {
+                    // update state if something changed
 
+                    const prevState = store.getState();
+                    const returnValue = next(action);
+
+
+                    const nextState = store.getState(); 
+                    if ( 
+                        prevState.todolist.byId !== nextState.todolist.byId &&
+                        isSafe(action)
+                    ) {
+
+                        updateWholeState(
+                            database,
+                            nextState.user,
+                            nextState.todolist
+                        )
+                            .then(
+                                () => store.dispatch({
+                                    type: UPDATED_DISTANT_STATE,
+                                    data: null,
+                                    meta: meta()
+                                }),
+                                error => store.dispatch({
+                                    type: UPDATED_DISTANT_STATE_ERROR,
+                                    data: error,
+                                    meta: meta()
+                                })
+                            );
+
+                    }
+
+
+                    return returnValue;
+                }
             }
 
         };

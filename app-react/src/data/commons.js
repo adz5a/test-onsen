@@ -9,6 +9,6 @@ export const ACTIONFACTORY = prefix => partial(joinUppercase, prefix);
 
 const GLOBALACTION = ACTIONFACTORY("global");
 
-export const PROCESSING = GLOBALACTION("procressing");
+export const PROCESSING = GLOBALACTION("processing");
 
 

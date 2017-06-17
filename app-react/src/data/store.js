@@ -1,14 +1,14 @@
-import { 
+import {
     createStore as createReduxStore,
     applyMiddleware,
     compose,
     combineReducers
 } from 'redux';
 import {
-    reducer as user 
+    reducer as user
 } from "./user";
 import {
-    reducer as todolist 
+    reducer as todolist
 } from "./todolist";
 
 
@@ -27,7 +27,10 @@ export function createStore ( {
 
     if ( process.env.NODE_ENV !== "production" ) {
 
-        const { ADD_TODO_ERROR } = require("./todolist");
+        const {
+            ADD_TODO_ERROR,
+            UPDATED_DISTANT_STATE_ERROR
+             } = require("./todolist");
         const { LOG_ERROR } = require("./user");
 
         composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -37,7 +40,8 @@ export function createStore ( {
 
                 return (
                     action.type === LOG_ERROR ||
-                    action.type === ADD_TODO_ERROR
+                    action.type === ADD_TODO_ERROR ||
+                    action.type === UPDATED_DISTANT_STATE_ERROR
                 );
 
             }

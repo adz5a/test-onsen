@@ -19,6 +19,8 @@ export const STATUS_DELETED = TODOSTATUS("deleted");
 export const ADD_TODO = TODOACTION("add-todo");
 export const ADD_TODO_ERROR = TODOACTION("add-todo-error");
 export const TOGGLE_TODO = TODOACTION("toggle-todo");
+export const UPDATED_DISTANT_STATE = TODOACTION("updated-distant-state");
+export const UPDATED_DISTANT_STATE_ERROR = TODOACTION("updated-distant-state-error");
 
 const defaultState = {
     processing: false,
