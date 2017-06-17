@@ -3,24 +3,38 @@ import React, {
     // PropTypes
 } from "react";
 import {
-    List as OnsenList,
+    List as MaterialList,
     ListItem
-} from "react-onsenui";
+} from "material-ui/List";
+import { map } from "lodash";
 import { connect } from "react-redux";
 import propTypes from "prop-types";
+
+
+function renderTodo ( todo, index ) {
+
+    return (
+        <ListItem
+            key={index}
+        >
+            { todo.todo }
+        </ListItem>
+    );
+
+}
+
 
 export function List ( { todolist = { todos: [] } }) {
 
     return (
-        <OnsenList
-            dataSource={todolist.todos}
-            renderRow={
-                ( todo, key ) => <TodoItem
-                    todo={todo}
-                    key={key}
-                />
+        <MaterialList>
+            {
+                map(
+                    todolist.todos,
+                    renderTodo
+                )
             }
-        />
+        </MaterialList>
     );
 
 }
