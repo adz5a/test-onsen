@@ -1,12 +1,9 @@
 import React, {  } from 'react';
 import propTypes from "prop-types";
-import {
-    Page as OnsenPage,
-    Toolbar as OnsenToolbar,
-    BackButton,
-    Icon
-} from "react-onsenui";
-import { noop } from "lodash";
+import AppBar from "material-ui/AppBar";
+import MenuIcon from "material-ui/svg-icons/action/view-headline";
+import BackIcon from "material-ui/svg-icons/hardware/keyboard-arrow-left";
+import IconButton from "material-ui/IconButton";
 
 
 export function goBack () {
@@ -16,38 +13,13 @@ export function goBack () {
 }
 
 
-export function createToolbar ( {
-    title,
-    hasBackButton,
-    toggleMenu = noop
-} ) {
-
-    return () => (
-        <OnsenToolbar>
-            <div className="left">
-                {
-
-                    hasBackButton ?
-                        <BackButton onClick={goBack}>Back</BackButton>:
-                        null
 
 
-                }
-            </div>
-            <div className="center">{title}</div>
-            <div className="right">
-                <Icon 
-                    style={{
-                        marginRight: "1em"
-                    }}
-                    icon="ion-navicon, material:md-menu"
-                    onClick={toggleMenu}
-                />
-            </div>
-        </OnsenToolbar>
-    );
 
-}
+const style = {
+    height: "100vh",
+    width: "100%"
+};
 
 
 export function Page ( {
@@ -56,16 +28,30 @@ export function Page ( {
     children
 }, context ) {
 
+
+    const barProps = {
+        title,
+        showMenuIconButton: hasBackButton,
+        iconElementRight: <IconButton onClick={context.toggleMenu}><MenuIcon /></IconButton>,
+    };
+
+    if ( hasBackButton ) {
+
+        barProps.iconElementLeft = <IconButton onClick={goBack}><BackIcon /></IconButton>;
+
+    }
+
     return (
-            <OnsenPage
-                renderToolbar={createToolbar({ 
-                    title,
-                    hasBackButton,
-                    toggleMenu: context.toggleMenu
-                })}
-            >
+        <section
+            style={style}
+        >
+            <AppBar
+                { ...barProps }
+            />
+            <section>
                 { children }
-            </OnsenPage>
+            </section>
+        </section>
     );
 
 }
