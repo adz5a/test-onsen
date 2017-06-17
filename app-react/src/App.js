@@ -9,6 +9,9 @@ import {
     TodoListPage
 } from "views/todolist/Page";
 import {
+    GalleryPage
+} from "views/gallery/Page";
+import {
     Route
 } from "react-router-dom";
 import MenuItem from "material-ui/MenuItem";
@@ -87,6 +90,10 @@ class App extends Component {
                     <Route
                         component={TodoListPage}
                         path="/todolist"
+                    />
+                    <Route
+                        component={GalleryPage}
+                        path="/gallery"
                     />
                 </section>
             </section>

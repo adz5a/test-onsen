@@ -42,6 +42,14 @@ export function HomePage () {
                             </CardActions>
                         </Card>
 
+                        <Card>
+                            <CardHeader
+                                title="Gallery"
+                            />
+                            <CardActions>
+                                <Link to="/gallery"><FlatButton label="Go" /></Link>
+                            </CardActions>
+                        </Card>
 
 
             </section>
