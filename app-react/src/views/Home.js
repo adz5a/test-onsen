@@ -5,6 +5,8 @@ import {
 import {
     Link
 } from "react-router-dom";
+import {Card, CardActions, CardHeader,} from 'material-ui/Card';
+import FlatButton from 'material-ui/FlatButton';
 
 export function HomePage () {
 
@@ -15,22 +17,33 @@ export function HomePage () {
             <section
                 style={{
                     maxWidth: "80%",
-                    margin: "auto",
-                    paddingTop: "3em"
+                    margin: "5em auto 0 auto",
+                    display: "flex",
+                    justifyContent: "space-around"
                 }}
             >
-                <ul>
-                    <li>
-                        <Link to={"/login"}>
-                            {"Login"}
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to={"/todolist"}>
-                            {"Your Todo List"}
-                        </Link>
-                    </li>
-                </ul>
+
+
+                        <Card>
+                            <CardHeader
+                                title="Login"
+                            />
+                            <CardActions>
+                                <Link to="/login"><FlatButton label="Go" /></Link>
+                            </CardActions>
+                        </Card>
+
+                        <Card>
+                            <CardHeader
+                                title="Todos"
+                            />
+                            <CardActions>
+                                <Link to="/todolist"><FlatButton label="Go" /></Link>
+                            </CardActions>
+                        </Card>
+
+
+
             </section>
         </Page>
 
