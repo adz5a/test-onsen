@@ -50,6 +50,8 @@ export function reducer ( state = defaultState, action ) {
                         ...state,
                         processing: true
                     };
+                default:
+                    return state;
 
             }
 

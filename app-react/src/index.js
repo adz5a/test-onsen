@@ -23,7 +23,10 @@ import "onsenui/css/onsenui.css";
 import {
     isCordova
 } from "./env";
+import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import reactTapEventPlugin from "react-tap-event-plugin";
 
+reactTapEventPlugin();
 
 const api = initApi(firebaseConfig);
 const userMiddleware = userApi(api);
@@ -41,7 +44,9 @@ ReactDOM.render(
         })}
     >
         <Router>
-            <App />
+            <MuiThemeProvider>
+                    <App />
+            </MuiThemeProvider>
         </Router>
     </Provider>,
     document.getElementById('root')
