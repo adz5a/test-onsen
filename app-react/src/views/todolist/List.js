@@ -9,15 +9,32 @@ import {
 import { map } from "lodash";
 import { connect } from "react-redux";
 import propTypes from "prop-types";
+import moment from "moment";
 
 
+const dateStyle = {
+    float: "right",
+    fontSize: "0.8em"
+}
 function renderTodo ( todo, index ) {
+
+
+    const {
+        todo: content,
+        date
+    } = todo;
+
 
     return (
         <ListItem
             key={index}
         >
-            { todo.todo }
+            <span>{ content }</span>
+            <span
+                style={dateStyle}
+            >
+                { moment(date).fromNow() }
+            </span>
         </ListItem>
     );
 
