@@ -1,7 +1,5 @@
 import React from "react";
-import {
-    Card
-} from "react-onsenui";
+import Card from "material-ui/Card";
 import {
     Link
 } from "react-router-dom";

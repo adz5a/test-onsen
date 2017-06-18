@@ -18,8 +18,6 @@ import {
     todoApi
 } from "api/todolist";
 import Router from "./Router";
-import "onsenui/css/onsen-css-components.css";
-import "onsenui/css/onsenui.css";
 import {
     isCordova,
     isProduction
