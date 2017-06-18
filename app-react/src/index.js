@@ -24,6 +24,7 @@ import {
 } from "./env";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import reactTapEventPlugin from "react-tap-event-plugin";
+import "./reset.css";
 
 reactTapEventPlugin();
 
