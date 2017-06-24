@@ -4,7 +4,7 @@ import AppBar from "material-ui/AppBar";
 import MenuIcon from "material-ui/svg-icons/action/view-headline";
 import BackIcon from "material-ui/svg-icons/hardware/keyboard-arrow-left";
 import IconButton from "material-ui/IconButton";
-
+import "./page.css";
 
 export function goBack () {
 
@@ -48,7 +48,9 @@ export function Page ( {
             <AppBar
                 { ...barProps }
             />
-            <section>
+            <section
+                className="inner-page"
+            >
                 { children }
             </section>
         </section>
