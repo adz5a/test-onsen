@@ -65,8 +65,6 @@ function renderTodo ( onToggle ) {
 
 const listStyle = {
 
-    paddingLeft: "5em",
-    paddingRight: "5em",
 
 };
 export function List ( props ) {
@@ -78,6 +76,7 @@ export function List ( props ) {
     } = props;
 
     let _todos = todolist.todos;
+
     if ( status === STATUS_OFF || status === STATUS_ON ) {
 
         _todos = filter(
