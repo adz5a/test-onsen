@@ -1,9 +1,24 @@
 {
+
     "hosting": {
         "public": "build",
         "ignore": [
-            "firebase.json",
-            "node_modules"
+            "node_modules",
+            "firebase.json"
+        ],
+        "headers": [
+
+            {
+                "source": "/service-worker.js",
+                "headers": [
+                    {
+                        "key": "Cache-Control",
+                        "value": "no-cache, no-store"
+                    }
+                ]
+            }
+
         ]
     }
+
 }
