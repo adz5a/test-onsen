@@ -45,7 +45,7 @@ ReactDOM.render(
     >
         <Router>
             <MuiThemeProvider>
-                    <App />
+                <App />
             </MuiThemeProvider>
         </Router>
     </Provider>,

@@ -32,7 +32,7 @@ export function LoginUI ( { 
                 title="Thanks for logging in"
             />
             <CardText>
-                {"Your email: "}
+                {"Your email : " + user.email}
             </CardText>
             <CardActions>
                 <RaisedButton
