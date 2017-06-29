@@ -7,6 +7,16 @@ import {
 } from "./../Page";
 import {
 } from "recompose";
+import {
+    Card,
+    CardHeader,
+    CardActions
+} from "material-ui/Card";
+import {
+    Link
+} from "react-router-dom";
+import FlatButton from 'material-ui/FlatButton';
+
 export function NotFoundPage () {
 
     return (
@@ -22,9 +32,15 @@ export function NotFoundPage () {
                     height: "100%"
                 }}
             >
-                <p>
-                    {"Not FOUND"}
-                </p>
+                <Card
+                >
+                    <CardHeader
+                        title={"Not Found"}
+                    />
+                    <CardActions>
+                        <Link to={"/"}><FlatButton label={"Home"}/></Link>
+                    </CardActions>
+                </Card>
             </section>
         </Page>
 
