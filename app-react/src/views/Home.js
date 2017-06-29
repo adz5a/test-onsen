@@ -10,8 +10,29 @@ import FlatButton from 'material-ui/FlatButton';
 
 
 const cardStyle = {
-    margin: "1em"
+    width: "45%",
+    marginTop: "1em",
+    marginBottom: "1em",
 };
+
+
+function AppCard ( { title = "", route = "/" , label = "Go" } ) {
+
+    return (
+        <Card
+            style={cardStyle}
+        >
+            <CardHeader
+                title={title}
+            />
+            <CardActions>
+                <Link to={route}><FlatButton label={label}/></Link>
+            </CardActions>
+        </Card>
+    );
+
+}
+
 
 
 export function HomePage () {
@@ -31,30 +52,18 @@ export function HomePage () {
             >
 
 
-            <Card
-                style={cardStyle}
-            >
-                <CardHeader
-                    title="Login"
-                />
-                <CardActions>
-                    <Link to="/login"><FlatButton label="Go" /></Link>
-                </CardActions>
-            </Card>
-
-            <Card
-                style={cardStyle}
-            >
-                <CardHeader
-                    title="Todos"
-                />
-                <CardActions>
-                    <Link to="/todolist"><FlatButton label="Go" /></Link>
-                </CardActions>
-            </Card>
-
-
-
+            <AppCard
+                route="/login"
+                title="Login"
+            />
+            <AppCard
+                route="/todolist"
+                title="Todo"
+            />
+            <AppCard
+                route="/hackernews"
+                title="Hackernews"
+            />
         </section>
     </Page>
 

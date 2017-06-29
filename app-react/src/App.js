@@ -6,13 +6,18 @@ import {
     HomePage
 } from "views/Home";
 import {
+    NotFoundPage
+} from "views/notFound/Page";
+import {
     TodoListPage
 } from "views/todolist/Page";
 import {
     GalleryPage
 } from "views/gallery/Page";
 import {
-    Route
+    Route,
+    Switch,
+    Redirect
 } from "react-router-dom";
 import MenuItem from "material-ui/MenuItem";
 import Drawer from "material-ui/Drawer";
@@ -78,23 +83,30 @@ class App extends Component {
                     <MenuItem>Yola</MenuItem>
                 </Drawer>
                 <section>
-                    <Route
-                        path="/"
-                        exact={true}
-                        component={HomePage}
-                    />
-                    <Route
-                        component={LoginPage}
-                        path="/login"
-                    />
-                    <Route
-                        component={TodoListPage}
-                        path="/todolist"
-                    />
-                    <Route
-                        component={GalleryPage}
-                        path="/gallery"
-                    />
+                    <Switch>
+                        <Route
+                            path="/"
+                            exact={true}
+                            component={HomePage}
+                        />
+                        <Route
+                            component={LoginPage}
+                            path="/login"
+                        />
+                        <Route
+                            component={TodoListPage}
+                            path="/todolist"
+                        />
+                        <Route
+                            component={NotFoundPage}
+                            path="/404"
+                        />
+                        <Route
+                            component={
+                                () => <Redirect to="/404"/>
+                            }
+                        />
+                    </Switch>
                 </section>
             </section>
         );
