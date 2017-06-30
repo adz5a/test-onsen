@@ -7,7 +7,9 @@ import {
 } from "./middleware";
 import {
     baseURL,
-    bucketName
+    bucketName,
+    deSanitizeURL,
+    sanitizeURL
 } from "./commons";
 
 
@@ -16,5 +18,7 @@ export {
     middleware,
     LOAD,
     baseURL,
-    bucketName
+    bucketName,
+    deSanitizeURL,
+    sanitizeURL
 }

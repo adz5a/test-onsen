@@ -8,7 +8,8 @@ import {
 import map from "lodash/fp/map";
 import {
     baseURL,
-    bucketName
+    bucketName,
+    sanitizeURL
 } from "data/aws";
 import "./mosaic.css";
 import {
@@ -51,7 +52,7 @@ const renderContent = ( urls, layout, baseURL ) => map( url => {
             className="gallery-img-item"
             key={url}
             style={layout}
-            to={baseURL + "/" + encodeURI(url)}
+            to={baseURL + "/" + sanitizeURL(url)}
         >
             <img
                 src={url}
@@ -110,7 +111,7 @@ export function Mosaic ( {
                 style={{
                     textAlign: "center",
                     paddingTop: "1em",
-                    paddingTop: "1em",
+                    paddingBottom: "1em",
                 }}
             >
                 <FlatButton onClick={more}>
