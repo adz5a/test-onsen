@@ -5,9 +5,16 @@ import {
 import {
     middleware
 } from "./middleware";
-console.log(reducer, middleware);
+import {
+    baseURL,
+    bucketName
+} from "./commons";
+
+
 export { 
     reducer,
     middleware,
-    LOAD
+    LOAD,
+    baseURL,
+    bucketName
 }

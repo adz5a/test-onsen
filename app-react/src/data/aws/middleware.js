@@ -7,7 +7,10 @@ import {
 import {
     LOAD
 } from "./reducer";
-
+import {
+    baseURL,
+    bucketName
+} from "./commons";
 
 const meta = metaData => ({
     ...metaData,
@@ -27,8 +30,6 @@ const contentToJSON = content => {
 const parseContents = map( contentNode => contentToJSON(contentNode.childNodes, {}) )
 
 console.log(process.env);
-const baseURL = process.env.REACT_APP_BASE_URL;
-const bucketName = process.env.REACT_APP_BUCKET_NAME;
 
 const emptyNode = name => ({
     textContent: "",

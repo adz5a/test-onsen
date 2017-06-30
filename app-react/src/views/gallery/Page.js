@@ -1,7 +1,7 @@
 import React, {
     // Component,
     // PropTypes
-} from "react";
+} from "react";
 import {
     Page
 } from "./../Page";
@@ -15,6 +15,9 @@ import {
 import {
     connect
 } from "react-redux";
+import {
+    Mosaic
+} from "./Mosaic";
 export function GalleryPage () {
 
     return (
