@@ -63,13 +63,15 @@ const containerStyle = {
     flexWrap: "wrap",
 };
 const noop = () => {};
-export function Mosaic ( { 
+export function Mosaic ( {
     content = [],
     toggleLayout = noop,
     toggle2 = noop,
     toggle3 = noop,
     toggle4 = noop,
-    layout
+    layout = 2,
+    more = noop,
+    length = 10
 } ) {
 
     return (
@@ -91,10 +93,21 @@ export function Mosaic ( {
                 style={containerStyle}
             >
                 {
-                    renderContent(content.slice(0, 10), contentStyle[layout])
+                    renderContent(content.slice(0, length), contentStyle[layout])
                 }
             </section>
 
+            <section
+                style={{
+                    textAlign: "center",
+                    paddingTop: "1em",
+                    paddingTop: "1em",
+                }}
+            >
+                <FlatButton onClick={more}>
+                    MOAR
+                </FlatButton>
+            </section>
         </section>
     );
 
@@ -127,22 +140,33 @@ export const WithToggle = withState(
     "toggleLayout",
     4
 );
-export const WithTogglers = withHandlers( props => ({
-    toggle2 () {
+export const WithImgLength = withState(
+    "length",
+    "setLength",
+    10
+);
+export const WithTogglers = withHandlers( ({
+    toggle2: props => () => {
         return props.toggleLayout(2);
     },
-    toggle3 () {
+    toggle3: props => () => {
         return props.toggleLayout(3);
     },
-    toggle4 () {
+    toggle4: props => () => {
         return props.toggleLayout(4);
+    },
+    more: props => () => {
+
+        return props.setLength( props.length + 10 );
+
     }
 }) );
 
 export const enhancer = compose(
     WithConnect,
     WithToggle,
-    WithTogglers
+    WithImgLength,
+    WithTogglers,
 );
 
 export const EnhancedMosaic = enhancer(Mosaic);
