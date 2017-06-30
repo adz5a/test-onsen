@@ -49,14 +49,10 @@ const renderContent = ( urls, layout ) => map( url => {
             key={url}
             style={layout}
         >
-            <div
-                className="gallery-img-wrapper"
-            >
                 <img
                     src={url}
                     className="gallery-img"
                 />
-            </div>
         </section>
     );
 
@@ -70,6 +66,9 @@ const noop = () => {};
 export function Mosaic ( { 
     content = [],
     toggleLayout = noop,
+    toggle2 = noop,
+    toggle3 = noop,
+    toggle4 = noop,
     layout
 } ) {
 
@@ -77,16 +76,22 @@ export function Mosaic ( {
         <section>
             <Toolbar>
                 <ToolbarGroup>
-                    <FlatButton>2</FlatButton>
-                    <FlatButton>3</FlatButton>
-                    <FlatButton>4</FlatButton>
+                    <FlatButton
+                        onClick={toggle2}
+                    >2</FlatButton>
+                    <FlatButton
+                        onClick={toggle3}
+                    >3</FlatButton>
+                    <FlatButton
+                        onClick={toggle4}
+                    >4</FlatButton>
                 </ToolbarGroup>
             </Toolbar>
             <section
                 style={containerStyle}
             >
                 {
-                    renderContent(content, contentStyle[layout])
+                    renderContent(content.slice(0, 10), contentStyle[layout])
                 }
             </section>
 
