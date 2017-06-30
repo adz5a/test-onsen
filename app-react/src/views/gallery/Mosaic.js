@@ -11,10 +11,18 @@ import {
     bucketName
 } from "data/aws";
 
+const renderContent = map( url => {
+    return <img src={url} key={url} />
+});
 
-export function Mosaic () {
+export function Mosaic ( { content = [] } ) {
 
-
+    console.log(content);
+    return (
+        <section>{
+            renderContent(content.slice(0, 10))
+        }</section>
+    );
 
 }
 
@@ -31,8 +39,14 @@ const toURLs = awsState => {
 
 export function mapStateToProps ( state ) {
 
+    const awsState = state.aws;
+
     return {
-        content: state.aws.data.contents
+        content: toURLs(awsState)
     };
 
 }
+
+export const WithConnect = connect(mapStateToProps);
+
+export const EnhancedMosaic = WithConnect(Mosaic);

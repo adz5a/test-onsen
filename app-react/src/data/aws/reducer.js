@@ -32,7 +32,10 @@ export function reducer ( state = defaultState, action ) {
         case LOAD:
             return {
                 ...state,
-                ...action.data
+                data: {
+                    ...state.data,
+                    ...action.data
+                }
             };
 
 

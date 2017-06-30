@@ -16,7 +16,8 @@ import {
     connect
 } from "react-redux";
 import {
-    Mosaic
+    // Mosaic,
+    EnhancedMosaic as Mosaic
 } from "./Mosaic";
 export function GalleryPage () {
 
@@ -33,6 +34,7 @@ export function GalleryPage () {
                     height: "100%"
                 }}
             >
+                <Mosaic />
             </section>
         </Page>
 
