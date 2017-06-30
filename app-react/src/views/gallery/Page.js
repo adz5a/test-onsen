@@ -24,7 +24,8 @@ import {
     Switch
 } from "react-router-dom";
 import {
-    ImageViewer
+    // ImageViewer,
+    EnhancedImageViewer as ImageViewer
 } from "./ImageViewer";
 
 export function GalleryPage () {

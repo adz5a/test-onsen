@@ -7,25 +7,40 @@ import {
 } from "react-redux";
 import {
     compose,
-    lifecycle
+    lifecycle,
+    branch,
+    withProps,
+    renderComponent
 } from "recompose";
 import {
+    baseURL,
+    bucketName,
     deSanitizeURL
 } from "data/aws";
+import {
+    Redirect
+} from "react-router-dom";
+import some from "lodash/fp/some";
+
+const hasImage = ( url, state ) => some( object => {
+
+    return (baseURL + "/" + bucketName + "/" + object.Key) === url;
+
+}, state);
 
 export function ImageViewer ( {
     match = {
         params: {}
-    }
+    },
+    state,
+    originalURL = ""
 } ) {
 
-    console.log(match);
-    const id = match.params.id || "";
-    const originalURL = decodeURI(atob(id));
-    console.log(originalURL);
     return (
         <section>
-            {"yolo"}
+            <img
+                src={originalURL}
+            />
         </section>
     );
 
@@ -41,8 +56,22 @@ export function mapStateToProps ( state ) {
 
 export const WithConnect = connect(mapStateToProps);
 
-export const enhancer = compose(
-    WithConnect
+
+export const WithOriginalURL = withProps(
+    props => ({
+        originalURL: deSanitizeURL(props.match.params.id)
+    })
 );
+// export const WithImageLoaded = branch(
+//     props => !hasImage(props.originalURL, props.state.data.contents),
+//     renderComponent(() => <Redirect to="/404"/>)
+// );
+
+export const enhancer = compose(
+    WithConnect,
+    WithOriginalURL,
+    // WithImageLoaded
+);
+
 
 export const EnhancedImageViewer = enhancer(ImageViewer);
