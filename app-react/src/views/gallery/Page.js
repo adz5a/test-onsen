@@ -19,6 +19,12 @@ import {
     // Mosaic,
     EnhancedMosaic as Mosaic
 } from "./Mosaic";
+import {
+    Route,
+    Switch
+} from "react-router-dom";
+
+
 export function GalleryPage () {
 
     return (
@@ -32,7 +38,17 @@ export function GalleryPage () {
                     height: "100%"
                 }}
             >
-                <Mosaic />
+                <Switch>
+                    <Route
+                        exact
+                        path="/gallery"
+                        component={Mosaic}
+                    />
+                    <Route
+                        path="/gallery/:id"
+                        component={() => (<div>yolo</div>)}
+                    />
+                </Switch>
             </section>
         </Page>
 

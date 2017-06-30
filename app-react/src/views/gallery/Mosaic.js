@@ -23,6 +23,9 @@ import {
     compose,
     withHandlers
 } from "recompose";
+import {
+    Link
+} from "react-router-dom";
 
 const contentStyle = {
     "2": {
@@ -41,19 +44,20 @@ const contentStyle = {
             textAlign: "center"
     },
 };
-const renderContent = ( urls, layout ) => map( url => {
+const renderContent = ( urls, layout, baseURL ) => map( url => {
 
     return (
-        <section
+        <Link
             className="gallery-img-item"
             key={url}
             style={layout}
+            to={baseURL + "/" + encodeURI(url)}
         >
-                <img
-                    src={url}
-                    className="gallery-img"
-                />
-        </section>
+            <img
+                src={url}
+                className="gallery-img"
+            />
+        </Link>
     );
 
 }, urls);
@@ -71,7 +75,8 @@ export function Mosaic ( {
     toggle4 = noop,
     layout = 2,
     more = noop,
-    length = 10
+    length = 10,
+    match = {}
 } ) {
 
     return (
@@ -93,7 +98,11 @@ export function Mosaic ( {
                 style={containerStyle}
             >
                 {
-                    renderContent(content.slice(0, length), contentStyle[layout])
+                    renderContent(
+                        content.slice(0, length),
+                        contentStyle[layout],
+                        match.url
+                    )
                 }
             </section>
 
