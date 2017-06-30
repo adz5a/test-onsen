@@ -11,42 +11,86 @@ import {
     bucketName
 } from "data/aws";
 import "./mosaic.css";
+import {
+    Toolbar,
+    ToolbarGroup,
+    ToolbarSeparator,
+    ToolbarTitle
+} from 'material-ui/Toolbar';
+import FlatButton from "material-ui/FlatButton";
+import {
+    withState,
+    compose,
+    withHandlers
+} from "recompose";
 
 const contentStyle = {
-    width: "50%",
-    height: "27em",
-    textAlign: "center"
+    "2": {
+            width: "50%",
+            height: "27em",
+            textAlign: "center"
+    },
+    "3": {
+            width: "33%",
+            height: "27em",
+            textAlign: "center"
+    },
+    "4": {
+            width: "25%",
+        maxHeight: "27em",
+            textAlign: "center"
+    },
 };
-const renderContent = map( url => {
+const renderContent = ( urls, layout ) => map( url => {
 
     return (
         <section
+            className="gallery-img-item"
             key={url}
-            style={contentStyle}
+            style={layout}
         >
-            <img
-                src={url}
-                className="gallery-img"
-            />
+            <div
+                className="gallery-img-wrapper"
+            >
+                <img
+                    src={url}
+                    className="gallery-img"
+                />
+            </div>
         </section>
     );
 
-});
+}, urls);
 
 const containerStyle = {
     display: "flex",
     flexWrap: "wrap",
-    justifyContent: "space-around"
 };
-export function Mosaic ( { content = [] } ) {
+const noop = () => {};
+export function Mosaic ( { 
+    content = [],
+    toggleLayout = noop,
+    layout
+} ) {
 
-    console.log(content);
     return (
-        <section
-            style={containerStyle}
-        >{
-            renderContent(content.slice(0, 10))
-        }</section>
+        <section>
+            <Toolbar>
+                <ToolbarGroup>
+                    <FlatButton>2</FlatButton>
+                    <FlatButton>3</FlatButton>
+                    <FlatButton>4</FlatButton>
+                </ToolbarGroup>
+            </Toolbar>
+            <section
+                style={containerStyle}
+            >
+                {
+                    renderContent(content, contentStyle[layout])
+                }
+            </section>
+
+        </section>
     );
 
 }
@@ -73,5 +117,27 @@ export function mapStateToProps ( state ) {
 }
 
 export const WithConnect = connect(mapStateToProps);
+export const WithToggle = withState(
+    "layout",
+    "toggleLayout",
+    4
+);
+export const WithTogglers = withHandlers( props => ({
+    toggle2 () {
+        return props.toggleLayout(2);
+    },
+    toggle3 () {
+        return props.toggleLayout(3);
+    },
+    toggle4 () {
+        return props.toggleLayout(4);
+    }
+}) );
 
-export const EnhancedMosaic = WithConnect(Mosaic);
+export const enhancer = compose(
+    WithConnect,
+    WithToggle,
+    WithTogglers
+);
+
+export const EnhancedMosaic = enhancer(Mosaic);
