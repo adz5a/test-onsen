@@ -6,8 +6,15 @@ import {
     Page
 } from "./../Page";
 import {
+    compose,
+    lifecycle
 } from "recompose";
-
+import {
+    LOAD
+} from "data/aws";
+import {
+    connect
+} from "react-redux";
 export function GalleryPage () {
 
     return (
@@ -29,3 +36,27 @@ export function GalleryPage () {
     )
 
 }
+
+export const loadOnMount = lifecycle({
+    componentWillMount () {
+
+        this.props.loadData();
+
+    }
+});
+
+export const WithConnect = connect(
+    null,
+    dispatch => ({
+        loadData: () => dispatch({
+            type: LOAD
+        })
+    })
+);
+
+export const enhancer = compose(
+    WithConnect,
+    loadOnMount
+);
+
+export const EnhancedPage = enhancer(GalleryPage);

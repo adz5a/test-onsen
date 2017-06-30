@@ -10,6 +10,9 @@ import {
 import {
     reducer as todolist
 } from "./todolist";
+import {
+    reducer as aws,
+} from "./aws";
 
 
 
@@ -22,7 +25,8 @@ export function createStore ( {
 
     const reducer = combineReducers({
         user,
-        todolist
+        todolist,
+        aws
     });
 
     if ( process.env.NODE_ENV !== "production" ) {

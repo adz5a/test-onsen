@@ -1,15 +1,18 @@
 import map from "lodash/fp/map";
 import reduce from "lodash/fp/reduce";
+import {
+    PROCESSING,
+    isSafe
+} from "data/commons";
+import {
+    LOAD
+} from "./reducer";
 
 
-/*
- * DOC : http://docs.aws.amazon.com/AmazonS3/latest/API/v2-RESTBucketGET.html
- *
- *
- *
- */
-
-
+const meta = metaData => ({
+    ...metaData,
+    origin: "middleware"
+});
 const contentToJSON = content => {
 
     return reduce(( res, node ) => {
@@ -23,8 +26,9 @@ const contentToJSON = content => {
 
 const parseContents = map( contentNode => contentToJSON(contentNode.childNodes, {}) )
 
-const baseURL = "https://s3.eu-west-2.amazonaws.com";
-const bucketName = "imgs-yolo";
+console.log(process.env);
+const baseURL = process.env.REACT_APP_BASE_URL;
+const bucketName = process.env.REACT_APP_BUCKET_NAME;
 
 const emptyNode = name => ({
     textContent: "",
@@ -61,18 +65,51 @@ const xmlToJSON = doc => {
 
 }
 
+
+const getDocument = () => fetch(`${baseURL}/${bucketName}?list-type=2`)
+    .then( res => res.text() )
+    .then(parseXML);
+
+const loadData = () => getDocument()
+    .then(xmlToJSON);
+
+
 export function middleware ( store ) {
 
+    return next => action => {
 
-    const getDocument = () => fetch(`${baseURL}/${bucketName}?list-type=2`)
-        .then( res => res.text() )
-        .then(parseXML);
+        const { type } = action;
 
-    const req = getDocument();
-    req.then(console.log);
-    req.then(xmlToJSON)
-        .then(console.log);
+        switch ( type ) {
 
-    return next => action => next(action);
+            case LOAD:
+                if ( isSafe(action) ) {
+
+                    loadData()
+                        .then(
+                            data => store.dispatch({
+                                type,
+                                data,
+                                meta: meta()
+                            })
+                        );
+                    return next({
+                        type: PROCESSING,
+                        data: action,
+                        meta: meta()
+                    });
+
+                } else {
+
+                    return next(action);
+
+                }
+
+            default:
+                return next(action);
+
+        }
+
+    };
 
 }

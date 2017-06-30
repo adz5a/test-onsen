@@ -4,7 +4,7 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import {
     createStore
-} from "data/store";
+} from "data/store";
 import {
     Provider
 } from "react-redux";
