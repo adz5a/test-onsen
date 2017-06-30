@@ -17,7 +17,7 @@ import propTypes from "prop-types";
 import moment from "moment";
 import {
     noop,
-    identity,
+    // identity,
     filter
 } from "lodash";
 

@@ -5,7 +5,7 @@ import React, {
 import Paper from "material-ui/Paper";
 import {
     forEach,
-    filter
+    // filter
 } from "lodash";
 
 
@@ -26,7 +26,7 @@ export class Dragger extends Component {
 
             e.preventDefault();
             const dt = e.dataTransfer;
-            const items = e.dataTransfer.items;
+            // const items = e.dataTransfer.items;
             
             forEach(
                 dt.files, 
