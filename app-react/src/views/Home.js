@@ -64,6 +64,10 @@ export function HomePage () {
                 route="/hackernews"
                 title="Hackernews"
             />
+            <AppCard
+                route="/gallery"
+                title="Gallery"
+            />
         </section>
     </Page>
 

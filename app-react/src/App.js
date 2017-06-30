@@ -98,6 +98,10 @@ class App extends Component {
                             path="/todolist"
                         />
                         <Route
+                            component={GalleryPage}
+                            path="/gallery"
+                        />
+                        <Route
                             component={NotFoundPage}
                             path="/404"
                         />
