@@ -10,16 +10,41 @@ import {
     baseURL,
     bucketName
 } from "data/aws";
+import "./mosaic.css";
 
+const contentStyle = {
+    width: "50%",
+    height: "27em",
+    textAlign: "center"
+};
 const renderContent = map( url => {
-    return <img src={url} key={url} />
+
+    return (
+        <section
+            key={url}
+            style={contentStyle}
+        >
+            <img
+                src={url}
+                className="gallery-img"
+            />
+        </section>
+    );
+
 });
 
+const containerStyle = {
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "space-around"
+};
 export function Mosaic ( { content = [] } ) {
 
     console.log(content);
     return (
-        <section>{
+        <section
+            style={containerStyle}
+        >{
             renderContent(content.slice(0, 10))
         }</section>
     );

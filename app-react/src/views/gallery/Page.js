@@ -28,8 +28,6 @@ export function GalleryPage () {
         >
             <section
                 style={{
-                    maxWidth: "80%",
-                    margin: "auto",
                     paddingTop: "3em",
                     height: "100%"
                 }}
