@@ -22,6 +22,9 @@ import {
     isCordova,
     isProduction
 } from "./env";
+import {
+    middleware as awsMiddleware
+} from "data/aws";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import reactTapEventPlugin from "react-tap-event-plugin";
 import "./reset.css";
@@ -35,11 +38,12 @@ const todoMiddleware = todoApi(api);
 
 
 ReactDOM.render(
-    <Provider 
+    <Provider
         store={createStore({
             middlewares: [
                 userMiddleware,
-                todoMiddleware
+                todoMiddleware,
+                awsMiddleware
             ]
         })}
     >
@@ -54,7 +58,7 @@ ReactDOM.render(
 
 if ( !isCordova || !isProduction ) {
 
-    // cannot register service worker 
+    // cannot register service worker
     // while on the filesystem
     registerServiceWorker();
 
