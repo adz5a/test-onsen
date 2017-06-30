@@ -23,7 +23,9 @@ import {
     Route,
     Switch
 } from "react-router-dom";
-
+import {
+    ImageViewer
+} from "./ImageViewer";
 
 export function GalleryPage () {
 
@@ -46,7 +48,7 @@ export function GalleryPage () {
                     />
                     <Route
                         path="/gallery/:id"
-                        component={() => (<div>yolo</div>)}
+                        component={ImageViewer}
                     />
                 </Switch>
             </section>
