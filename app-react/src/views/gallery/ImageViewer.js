@@ -29,7 +29,7 @@ import {
 import {
     // ImageTagger,
     EnhancedImageTagger as ImageTagger
-} from "./ImageTagger";
+} from "./ImageTagger";
 import "./imageviewer.css";
 
 

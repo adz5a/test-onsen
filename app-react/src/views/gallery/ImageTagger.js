@@ -20,12 +20,14 @@ import {
     // CardActions,
     CardHeader,
 } from 'material-ui/Card';
+import TextField from "material-ui/TextField";
+import FlatButton from "material-ui/FlatButton";
+const noop = () => {};
 
 
-
-
-export function ImageTagger ( { 
-    originalURL = ""
+export function ImageTagger ( {
+    originalURL = "",
+    onAdd = noop
 } ) {
 
     return (
@@ -35,6 +37,29 @@ export function ImageTagger ( {
             <CardHeader
                 title={"Tags"}
             />
+            <form
+                style={{
+                    display: "flex",
+                    marginLeft: "0.3em",
+                    marginRight: "0.3em"
+                }}
+                onSubmit={e => {
+
+                    e.preventDefault();
+                    const tagName = e.target.elements.tag.value;
+                    // console.log(tagName);
+
+
+                }}
+            >
+                <TextField
+                    placeholder="MyNewtag"
+                    name="tag"
+                />
+                <FlatButton
+                    type="submit"
+                >Add</FlatButton>
+            </form>
         </Card>
     );
 

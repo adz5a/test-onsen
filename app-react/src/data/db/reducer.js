@@ -3,6 +3,11 @@ import {
     BULK_SAVE
 } from "./commons";
 import reduce from "lodash/fp/reduce";
+import conforms from "lodash/fp/conforms";
+import isString from "lodash/isString";
+import every from "lodash/fp/every";
+import isArray from "lodash/isArray";
+
 
 
 const bulkUpdate = reduce( ( state, doc ) => {
@@ -12,6 +17,20 @@ const bulkUpdate = reduce( ( state, doc ) => {
     return state;
 
 
+});
+
+const allStrings = every(isString);
+
+const ObjectModel = conforms({
+    _id: isString,
+    type: isString,
+    tags: value => isArray(value) && allStrings(value)
+});
+
+const TagModel = conforms({
+    _id: isString,
+    name: isString,
+    description: isString
 });
 
 
