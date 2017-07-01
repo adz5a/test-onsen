@@ -52,7 +52,7 @@ const renderContent = ( urls, layout, baseURL ) => map( url => {
             className="gallery-img-item"
             key={url}
             style={layout}
-            to={baseURL + sanitizeURL(url)}
+            to={baseURL + "/" + sanitizeURL(url)}
         >
             <img
                 src={url}
