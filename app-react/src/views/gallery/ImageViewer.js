@@ -7,32 +7,31 @@ import {
 } from "react-redux";
 import {
     compose,
-    lifecycle,
-    branch,
+    // lifecycle,
+    // branch,
     withProps,
-    renderComponent
+    // renderComponent
 } from "recompose";
 import {
-    baseURL,
-    bucketName,
+    // baseURL,
+    // bucketName,
     deSanitizeURL
 } from "data/aws";
 import {
-    Redirect
+    // Redirect
 } from "react-router-dom";
-import {Card, CardActions, CardHeader,} from 'material-ui/Card';
-import some from "lodash/fp/some";
+import {
+    Card,
+    // CardActions,
+    CardHeader
+} from 'material-ui/Card';
+// import some from "lodash/fp/some";
 import {
     // ImageTagger,
     EnhancedImageTagger as ImageTagger
 } from "./ImageTagger";
 import "./imageviewer.css";
 
-const hasImage = ( url, state ) => some( object => {
-
-    return (baseURL + "/" + bucketName + "/" + object.Key) === url;
-
-}, state);
 
 export function ImageViewer ( {
     match = {
@@ -56,6 +55,7 @@ export function ImageViewer ( {
                     <img
                         className="imageviewer-img"
                         src={originalURL}
+                        alt={"yolo"}
                     />
                 </div>
             </Card>

@@ -12,8 +12,8 @@ import {
     TodoListPage
 } from "views/todolist/Page";
 import {
-    GalleryPage,
-    EnhancedPage
+    // GalleryPage,
+    EnhancedPage as GalleryPage
 } from "views/gallery/Page";
 import {
     Route,
@@ -99,7 +99,7 @@ class App extends Component {
                             path="/todolist"
                         />
                         <Route
-                            component={EnhancedPage}
+                            component={GalleryPage}
                             path="/gallery"
                         />
                         <Route

@@ -6,9 +6,9 @@ import {
     UPDATED_DISTANT_STATE_ERROR
 } from "data/todolist";
 import {
-    conforms,
+    // conforms,
     isObject,
-    defaults,
+    // defaults,
 } from "lodash";
 import {
     isUser,
@@ -16,29 +16,14 @@ import {
     LOG_USER
 } from "data/user";
 import {
-    PROCESSING
+    PROCESSING,
+    isSafe,
+    fromMiddleware as meta
 } from "data/commons";
 
 
-const fromMiddleware = conforms({
-    origin: value => value === "middleware"
-});
 
-const meta = (obj = {}) => defaults(obj, {
-    origin: "middleware"
-});
 
-function isSafe ( action ) {
-
-    return (
-        isObject(action) &&
-        (
-            !isObject(action.meta ) ||
-            ( isObject(action.meta) && !fromMiddleware(action.meta) )
-        )
-    );
-
-}
 
 
 function processAddTodo ( db, user, data = {} ) {

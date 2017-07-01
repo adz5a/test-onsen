@@ -6,18 +6,16 @@ import {
 } from "data/user";
 import {
     conforms,
-    isObject,
+    // isObject,
     isString,
     defaults,
     pick
 } from "lodash";
 import {
-    PROCESSING
+    PROCESSING,
+    isSafe
 } from "data/commons";
 
-const fromMiddleware = conforms({
-    origin: value => value === "middleware"
-});
 
 
 const meta = (obj = {}) => defaults(obj, {
@@ -25,17 +23,6 @@ const meta = (obj = {}) => defaults(obj, {
 });
 
 
-function isSafe ( action ) {
-
-    return (
-        isObject(action) &&
-        ( 
-            !isObject(action.meta ) ||
-            ( isObject(action.meta) && !fromMiddleware(action.meta) )
-        )
-    );
-
-}
 
 export const isCredentials = conforms({
     email: isString,

@@ -8,14 +8,19 @@ import {
 import {
     compose,
     lifecycle,
-    branch,
-    withProps,
-    renderComponent
+    // branch,
+    // withProps,
+    // renderComponent
 } from "recompose";
 import {
     SAVE
 } from "data/db";
-import {Card, CardActions, CardHeader,} from 'material-ui/Card';
+import {
+    Card,
+    // CardActions,
+    CardHeader,
+} from 'material-ui/Card';
+
 
 
 
@@ -57,7 +62,7 @@ export const onMount = lifecycle({
 
         this.props.save({
             _id: this.props.originalURL,
-            tags: []
+            tags: [ "yolo" ]
         });
 
     }

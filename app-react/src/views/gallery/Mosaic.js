@@ -15,8 +15,8 @@ import "./mosaic.css";
 import {
     Toolbar,
     ToolbarGroup,
-    ToolbarSeparator,
-    ToolbarTitle
+    // ToolbarSeparator,
+    // ToolbarTitle
 } from 'material-ui/Toolbar';
 import FlatButton from "material-ui/FlatButton";
 import {
@@ -52,11 +52,12 @@ const renderContent = ( urls, layout, baseURL ) => map( url => {
             className="gallery-img-item"
             key={url}
             style={layout}
-            to={baseURL + "/" + sanitizeURL(url)}
+            to={baseURL + sanitizeURL(url)}
         >
             <img
                 src={url}
                 className="gallery-img"
+                alt={"4 MY PEOPLE"}
             />
         </Link>
     );

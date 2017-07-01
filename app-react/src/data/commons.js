@@ -2,7 +2,8 @@ import {
     joinUppercase 
 } from "./../commons";
 import {
-    partial
+    partial,
+    isObject
 } from "lodash";
 
 export const ACTIONFACTORY = prefix => partial(joinUppercase, prefix);
@@ -11,17 +12,20 @@ const GLOBALACTION = ACTIONFACTORY("global");
 
 export const PROCESSING = GLOBALACTION("processing");
 
-export const isSafe = action => {
 
-    if ( action.meta ) {
+export function isSafe ( action ) {
 
-        const isFormMiddleware = action.meta && action.meta.origin === "middleware";
-        return !isFormMiddleware;
-
-    } else {
-
-        return true;
-
-    }
+    return (
+        isObject(action) &&
+        (
+            !isObject(action.meta ) ||
+            ( isObject(action.meta) && !action.meta.origin === "middleware" )
+        )
+    );
 
 }
+
+export const fromMiddleware = (meta = {}) => ({
+    ...meta,
+    origin: "middleware"
+});
