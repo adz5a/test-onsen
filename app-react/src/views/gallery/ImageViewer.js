@@ -20,7 +20,9 @@ import {
 import {
     Redirect
 } from "react-router-dom";
+import {Card, CardActions, CardHeader,} from 'material-ui/Card';
 import some from "lodash/fp/some";
+import "./imageviewer.css";
 
 const hasImage = ( url, state ) => some( object => {
 
@@ -37,10 +39,29 @@ export function ImageViewer ( {
 } ) {
 
     return (
-        <section>
-            <img
-                src={originalURL}
-            />
+        <section
+            className="image-viewer-container"
+        >
+            <Card
+                className="image-viewer-card"
+            >
+                <CardHeader
+                    title={originalURL}
+                />
+                <div className="imageviewer-img-wrapper">
+                    <img
+                        className="imageviewer-img"
+                        src={originalURL}
+                    />
+                </div>
+            </Card>
+            <Card
+                className="image-viewer-aside"
+            >
+                <CardHeader
+                    title={"Tags"}
+                />
+            </Card>
         </section>
     );
 

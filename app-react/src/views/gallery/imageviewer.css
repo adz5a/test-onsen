@@ -1,0 +1,37 @@
+.image-viewer-container {
+
+    display: flex;
+    justify-content: space-between;
+    max-height: 100%;
+
+}
+
+.image-viewer-card {
+
+    width: 80%;
+
+}
+
+.image-viewer-aside {
+
+    width: 18%;
+
+}
+
+.imageviewer-img-wrapper {
+
+    display: flex; /* Magic begins */
+    flex-direction: column;
+    justify-content: center; /* Center in main axis */
+    align-items: center; /* Center in cross axis */
+
+}
+
+.imageviewer-img {
+
+
+    max-width: 100%;
+    max-height: 100%;
+
+
+}
