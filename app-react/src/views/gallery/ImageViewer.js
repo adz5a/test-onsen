@@ -22,6 +22,10 @@ import {
 } from "react-router-dom";
 import {Card, CardActions, CardHeader,} from 'material-ui/Card';
 import some from "lodash/fp/some";
+import {
+    // ImageTagger,
+    EnhancedImageTagger as ImageTagger
+} from "./ImageTagger";
 import "./imageviewer.css";
 
 const hasImage = ( url, state ) => some( object => {
@@ -55,13 +59,9 @@ export function ImageViewer ( {
                     />
                 </div>
             </Card>
-            <Card
-                className="image-viewer-aside"
-            >
-                <CardHeader
-                    title={"Tags"}
-                />
-            </Card>
+            <ImageTagger 
+                originalURL={originalURL}
+            />
         </section>
     );
 

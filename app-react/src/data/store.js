@@ -13,6 +13,9 @@ import {
 import {
     reducer as aws,
 } from "./aws";
+import {
+    reducer as db
+} from "./db";
 
 
 
@@ -26,7 +29,8 @@ export function createStore ( {
     const reducer = combineReducers({
         user,
         todolist,
-        aws
+        aws,
+        db
     });
 
     if ( process.env.NODE_ENV !== "production" ) {
