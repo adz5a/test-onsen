@@ -20,7 +20,12 @@ import {
     // BucketForm,
     EnhancedBucketForm as BucketForm
 } from "./BucketForm";
-
+import {
+    // Bucket,
+    EnhancedBucket as Bucket
+} from "./Bucket";
+import Paper from "material-ui/Paper";
+import FlatButton from "material-ui/FlatButton";
 export function DataPage () {
 
     return (
@@ -35,6 +40,7 @@ export function DataPage () {
                 }}
             >
                 <BucketForm />
+                <Bucket />
             </section>
         </Page>
 

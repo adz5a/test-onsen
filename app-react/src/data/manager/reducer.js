@@ -5,6 +5,7 @@ import {
 const ACTION = ACTIONFACTORY("manager");
 
 export const SET_BUCKET = ACTION("set-bucket");
+export const LIST_DIRS = ACTION("list-dirs");
 
 export const setBucket = () => ({
     type: SET_BUCKET
