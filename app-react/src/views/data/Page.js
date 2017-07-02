@@ -35,6 +35,45 @@ const pStyle = {
 
 const title = "Bucket Information";
 
+
+function BucketForm () {
+
+    return (
+        <Card
+            style={cardStyle}
+        >
+            <CardHeader
+                title={title}
+            />
+            <CardActions>
+                <form
+                    onSubmit={ e => {
+
+                        e.preventDefault();
+                        const form = e.target.elements;
+                        const data = {
+                            baseURL: form.baseURL.value,
+                            bucket: form.bucket.value
+                        };
+
+                        console.log(data);
+                    }}
+                >
+                    <div style={pStyle}>
+                        <span>Base URL</span><TextField name="baseURL" />
+                    </div>
+                    <div style={pStyle}>
+                        <span>Bucket Name</span><TextField name="bucket" />
+                    </div>
+                    <FlatButton type="submit">Ok</FlatButton>
+                </form>
+            </CardActions>
+        </Card>
+    );
+
+}
+
+
 export function DataPage () {
 
     return (
@@ -48,24 +87,7 @@ export function DataPage () {
                     height: "100%"
                 }}
             >
-                <Card
-                    style={cardStyle}
-                >
-                    <CardHeader
-                        title={title}
-                    />
-                    <CardActions>
-                        <form>
-                            <div style={pStyle}>
-                                <span>Base URL</span><TextField name="baseURL" />
-                            </div>
-                            <div style={pStyle}>
-                                <span>Bucket Name</span><TextField name="bucket" />
-                            </div>
-                            <FlatButton>Ok</FlatButton>
-                        </form>
-                    </CardActions>
-                </Card>
+                <BucketForm />
             </section>
         </Page>
 
