@@ -16,6 +16,10 @@ import {
     EnhancedPage as GalleryPage
 } from "views/gallery/Page";
 import {
+    // GalleryPage,
+    DataPage 
+} from "views/data/Page";
+import {
     Route,
     Switch,
     Redirect
@@ -101,6 +105,10 @@ class App extends Component {
                         <Route
                             component={GalleryPage}
                             path="/gallery"
+                        />
+                        <Route
+                            component={DataPage}
+                            path="/data"
                         />
                         <Route
                             component={NotFoundPage}

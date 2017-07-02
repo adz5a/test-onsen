@@ -68,6 +68,10 @@ export function HomePage () {
                 route="/gallery"
                 title="Gallery"
             />
+            <AppCard
+                route="/data"
+                title="Data"
+            />
         </section>
     </Page>
 
