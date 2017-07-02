@@ -22,13 +22,13 @@ const queryAllNodes = ( doc, nodeName ) => ( doc.querySelectorAll(nodeName) || [
 const textContent = node => node.textContent;
 
 
-const listPrefixes = parser => ( { baseURL, bucketName }, set = new Set(), prefix = "" ) => {
+const listPrefixes = parser => ( { baseURL, bucket }, set = new Set(), prefix = "" ) => {
 
     const prefixQuery = prefix ?
         "&prefix=" + prefix :
         ""
 
-    return fetch(`${baseURL}/${bucketName}?list-type=2&delimiter=/` + prefixQuery)
+    return fetch(`${baseURL}/${bucket}?list-type=2&delimiter=/` + prefixQuery)
         .then( res => res.text() )
         .then(xml => {
 
@@ -57,7 +57,7 @@ const listPrefixes = parser => ( { baseURL, bucketName }, set = new Set(), prefi
                 return Promise.all(prefixes.map(
                     p => listPrefixes(parser)({ 
                         baseURL,
-                        bucketName
+                        bucket
                     }, 
                         set,
                         p

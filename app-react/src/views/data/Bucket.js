@@ -19,6 +19,10 @@ import {
 import {
     LIST_DIRS
 } from "data/manager";
+import keys from "lodash/keys";
+import {
+    Link
+} from "react-router-dom";
 
 
 const paperStyle = {
@@ -35,10 +39,47 @@ const sectionStyle = {
 
 
 const noop = () => {};
+const divStyle = {
+    display: "flex",
+    justifyContent: "space-between",
+    marginRight: "3em",
+    alignItems: "center"
+};
+
+const buttonStyle = {
+    paddingLeft: "0.5em",
+    paddingRight: "0.5em",
+    overflow: "hidden"
+};
+export function bucketList ( dirs ) {
+
+    return keys(dirs)
+        .map( dir => {
+
+            const props = {
+            };
+
+            return (
+                <ListItem 
+                    key={dir}
+                    initiallyOpen={false}
+                    nestedItems={bucketList(dirs[dir])}
+                >
+                    <div style={divStyle}>
+                        <Link to="/yolo">
+                            <RaisedButton style={buttonStyle}>{dir}</RaisedButton>
+                        </Link>
+                    </div>
+                </ListItem>
+            );
+        });
+}
+
 
 
 export function Bucket ( {
-    onRefresh = noop
+    onRefresh = noop,
+    dirs = {},
 } ) {
 
     return (
@@ -48,21 +89,25 @@ export function Bucket ( {
             <section
                 style={sectionStyle}
             >
-                <RaisedButton 
+                <RaisedButton
                     primary={true}
                     onClick={onRefresh}
                 >
                     Refresh
                 </RaisedButton>
             </section>
-            <List></List>
+            <List>{bucketList(dirs)}</List>
         </Paper>
     );
 
 }
 
 const enhancer = compose(
-    connect(null, dispatch => ({
+    connect(
+        state => ({
+            dirs: state.manager.content.dirs
+        }),
+        dispatch => ({
         onRefresh () {
 
             return dispatch({

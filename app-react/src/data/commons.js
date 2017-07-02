@@ -29,3 +29,8 @@ export const fromMiddleware = (meta = {}) => ({
     ...meta,
     origin: "middleware"
 });
+
+export const process = action => ({
+    type: PROCESSING,
+    data: action
+});
