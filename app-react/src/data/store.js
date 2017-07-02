@@ -16,6 +16,9 @@ import {
 import {
     reducer as db
 } from "./db";
+import {
+    reducer as manager
+} from "./manager";
 
 
 
@@ -30,7 +33,8 @@ export function createStore ( {
         user,
         todolist,
         aws,
-        db
+        db,
+        manager
     });
 
     if ( process.env.NODE_ENV !== "production" ) {

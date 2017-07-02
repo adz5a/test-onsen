@@ -28,6 +28,9 @@ import {
 import {
     middleware as dbMiddleware
 } from "data/db";
+import {
+    middleware as managerMiddleware
+} from "data/manager";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import reactTapEventPlugin from "react-tap-event-plugin";
 import "./reset.css";
@@ -47,7 +50,8 @@ ReactDOM.render(
                 userMiddleware,
                 todoMiddleware,
                 awsMiddleware,
-                dbMiddleware
+                dbMiddleware,
+                managerMiddleware
             ]
         })}
     >
