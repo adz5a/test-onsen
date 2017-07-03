@@ -21,7 +21,8 @@ import {
 } from "data/manager";
 import keys from "lodash/keys";
 import {
-    Link
+    Link,
+    withRouter
 } from "react-router-dom";
 
 
@@ -51,22 +52,19 @@ const buttonStyle = {
     paddingRight: "0.5em",
     overflow: "hidden"
 };
-export function bucketList ( dirs ) {
+export function bucketList ( root, dirs ) {
 
     return keys(dirs)
         .map( dir => {
 
-            const props = {
-            };
-
             return (
-                <ListItem 
+                <ListItem
                     key={dir}
                     initiallyOpen={false}
                     nestedItems={bucketList(dirs[dir])}
                 >
                     <div style={divStyle}>
-                        <Link to="/yolo">
+                        <Link to={ root + "/visualize?prefix=" + encodeURIComponent(dir)}>
                             <RaisedButton style={buttonStyle}>{dir}</RaisedButton>
                         </Link>
                     </div>
@@ -80,6 +78,7 @@ export function bucketList ( dirs ) {
 export function Bucket ( {
     onRefresh = noop,
     dirs = {},
+    match
 } ) {
 
     return (
@@ -96,7 +95,7 @@ export function Bucket ( {
                     Refresh
                 </RaisedButton>
             </section>
-            <List>{bucketList(dirs)}</List>
+            <List>{bucketList(match.url, dirs)}</List>
         </Paper>
     );
 
@@ -108,14 +107,16 @@ const enhancer = compose(
             dirs: state.manager.content.dirs
         }),
         dispatch => ({
-        onRefresh () {
+            onRefresh () {
 
-            return dispatch({
-                type: LIST_DIRS
-            });
+                return dispatch({
+                    type: LIST_DIRS
+                });
 
-        }
-    }))
+            }
+        })
+    ),
+    withRouter
 );
 
 export const EnhancedBucket = enhancer(Bucket);

@@ -21,12 +21,15 @@ import {
     EnhancedBucketForm as BucketForm
 } from "./BucketForm";
 import {
-    // Bucket,
+    // bucket,
     EnhancedBucket as Bucket
 } from "./Bucket";
+import {
+    Visualize
+} from "./Visualize";
 import Paper from "material-ui/Paper";
 import FlatButton from "material-ui/FlatButton";
-export function DataPage () {
+export function DataPage ( { match } ) {
 
     return (
         <Page
@@ -40,10 +43,18 @@ export function DataPage () {
                 }}
             >
                 <BucketForm />
-                <Bucket />
+                <Route 
+                    path={match.url}
+                    exact
+                    component={Bucket}
+                />
+                <Route 
+                    path={match.url + "/visualize"}
+                    component={Visualize}
+                />
             </section>
         </Page>
 
-    )
+    );
 
 }

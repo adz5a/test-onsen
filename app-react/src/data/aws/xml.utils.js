@@ -46,7 +46,7 @@ const listPrefixes = parser => ( { baseURL, bucket }, set = new Set(), prefix = 
 
                     return  ( p.length >= 1 ) && ( p !== prefix ) && !set.has(p);
 
-                } )
+                } );
 
             // add all to the accumulator set
             prefixes.forEach( p => set.add(p) );
