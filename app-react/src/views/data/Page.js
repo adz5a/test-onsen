@@ -25,7 +25,8 @@ import {
     EnhancedBucket as Bucket
 } from "./Bucket";
 import {
-    Visualize
+    // Visualize,
+    EnhancedVisualize as Visualize
 } from "./Visualize";
 import Paper from "material-ui/Paper";
 import FlatButton from "material-ui/FlatButton";
